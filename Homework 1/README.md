@@ -6,3 +6,6 @@ The work was done by distributing between multiple processes, using MPI, the tas
 
 ![image](https://user-images.githubusercontent.com/18760154/231065792-b40f1d9a-76bf-4929-bb78-8be7007e7ab0.png)
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/18760154/231065792-b40f1d9a-76bf-4929-bb78-8be7007e7ab0.png" />
+</p>
