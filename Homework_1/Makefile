@@ -20,3 +20,6 @@ run:
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
+
+clean:
+	-rm ./bin/$(FILENAME)
