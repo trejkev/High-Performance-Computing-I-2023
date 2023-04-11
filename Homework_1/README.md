@@ -13,6 +13,4 @@ The integral computation is performed using the trapezoid approximation, which u
 $$ \int_{a}^{b}f(x)dx\approx \frac{1}{2}\Delta x\sum_{i=a}^{b-\Delta x}\left [ f(x_{i}) + f(x_{i} + \Delta x) \right ] $$
 
 
-To compile the code use the following command: mpicc ./src/PiApproximator.c -o ./bin/PiApproximator
-
-To run the code use the following command: mpirun -n {Processes quantity} ./bin/PiApproximator
+Since the system is using a Makefile, running the code is quite simple, use make clean to remove older output files, make lint to check correctness of the syntaxis, make to compile the code, and make run to run the code with 1 process, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile.
