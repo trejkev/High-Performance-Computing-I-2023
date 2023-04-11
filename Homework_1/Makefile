@@ -1,6 +1,6 @@
 FILENAME   = PiApproximator
 COMPILER   = mpicc
-PROCESSES  = 1
+PROCESSES  = 64
 SOURCES    = ./src/*.c
 
 
@@ -15,7 +15,7 @@ $(FILENAME):
 	$(COMPILER) ./src/$(FILENAME).c -o ./bin/$(FILENAME)
 
 run:
-	mpirun -n $(PROCESSES) ./bin/$(FILENAME)
+	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
