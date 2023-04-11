@@ -1,3 +1,5 @@
+// Copyright 2023 Kevin Trejos Vargas <kevin.trejosvargas@ucr.ac.cr>
+
 #include <mpi.h>
 #include <stdio.h>
 #include <unistd.h>  // To use sleep
