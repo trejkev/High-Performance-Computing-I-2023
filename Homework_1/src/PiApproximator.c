@@ -5,7 +5,6 @@
 #include <math.h>  // Use floating abs
 
 int main(int argc, char** argv) {
-
     MPI_Init(NULL, NULL);
 
     int iRanksQty;
@@ -36,7 +35,7 @@ int main(int argc, char** argv) {
         // Rank 0 gets other ranks areas and adds to its current area
         double dOtherProcessArea = 0;
         for (int iInBoxRank = 1; iInBoxRank < iRanksQty; iInBoxRank++) {
-            MPI_Recv(&dOtherProcessArea, 1, MPI_DOUBLE, iInBoxRank, 0, 
+            MPI_Recv(&dOtherProcessArea, 1, MPI_DOUBLE, iInBoxRank, 0,
                 MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             dArea += dOtherProcessArea;
         }
@@ -48,7 +47,7 @@ int main(int argc, char** argv) {
     // Prints current pi approximation
     if (iMyRank == 0) {
         printf("Pi approximation using %d ranks is %.32f\n", iRanksQty, dArea);
-        double dError = fabs(dArea - 3.1415926535897932384626433832795028841971693993751058209749445923);
+        double dError = fabs(dArea - 3.141592653589793238462643383279502884197);
         printf("Error is: %.32f\n", dError);
     }
 
