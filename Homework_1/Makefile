@@ -1,7 +1,6 @@
 FILENAME   = PiApproximator
 COMPILER   = mpicc
 PROCESSES  = 1
-HEADERS    = ./src/*.h
 SOURCES    = ./src/*.c
 
 
