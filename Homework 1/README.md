@@ -11,3 +11,6 @@ The work was done by distributing between multiple processes, using MPI, the tas
 The integral computation is performed using the trapezoid approximation, which uses the following equation. Therefore, the shorter the delta x, the better the approximation.
 
 $$ \int_{a}^{b}f(x)dx\approx \frac{1}{2}\Delta x\sum_{i=a}^{b-\Delta x}\left [ f(x_{i}) + f(x_{i} + \Delta x) \right ] $$
+
+To compile the code use the following command: mpicc ./src/PiApproximator.c -o ./bin/PiApproximator
+To run the code use the following command: mpirun -n {Processes quantity} ./bin/PiApproximator
