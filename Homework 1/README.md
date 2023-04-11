@@ -7,3 +7,7 @@ The work was done by distributing between multiple processes, using MPI, the tas
 <p align="center">
   <img src="https://user-images.githubusercontent.com/18760154/231065792-b40f1d9a-76bf-4929-bb78-8be7007e7ab0.png" />
 </p>
+
+The integral computation is performed using the trapezoid approximation, which uses the following equation.
+
+$$ frac{1}{2}*\delta x(f(x)+f(x+1))$$
