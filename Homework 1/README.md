@@ -10,4 +10,4 @@ The work was done by distributing between multiple processes, using MPI, the tas
 
 The integral computation is performed using the trapezoid approximation, which uses the following equation.
 
-$$ frac{1}{2}*\delta x(f(x)+f(x+1))$$
+$$ \int_{a}^{b}f(x)dx\approx \frac{1}{2}\Delta x\sum_{i=0}^{N}\left [ f(x_{i}) + f(x_{i+1}) \right ] $$
