@@ -12,5 +12,7 @@ The integral computation is performed using the trapezoid approximation, which u
 
 $$ \int_{a}^{b}f(x)dx\approx \frac{1}{2}\Delta x\sum_{i=a}^{b-\Delta x}\left [ f(x_{i}) + f(x_{i} + \Delta x) \right ] $$
 
-To compile the code use the following command: mpicc ./src/PiApproximator.c -o ./bin/PiApproximator
-To run the code use the following command: mpirun -n {Processes quantity} ./bin/PiApproximator
+\begin{itemize}
+\item To compile the code use the following command: mpicc ./src/PiApproximator.c -o ./bin/PiApproximator
+\ item To run the code use the following command: mpirun -n {Processes quantity} ./bin/PiApproximator
+\end{itemize}
