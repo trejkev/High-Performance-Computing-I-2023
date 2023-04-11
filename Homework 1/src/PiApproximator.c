@@ -18,15 +18,13 @@ int main(int argc, char** argv) {
     double dLowerBound = (float)iMyRank*1/((float)iRanksQty);
     double dXToEvaluate;  // Will store x value to be evaluated
 
-    // Performs summatory evaluation
+    // Performs summatory evaluation using trapezoid approximation
     for (int iTrapezoidNum = 0; iTrapezoidNum < 10000; iTrapezoidNum++) {
-        dXToEvaluate = dLowerBound + (float)iTrapezoidNum*dDeltaX;
-        dArea += 4/(1+(float)dXToEvaluate*(float)dXToEvaluate)*dDeltaX;
-    }
-    // Missing from highest rank to complete 0-1 summatory
-    if (iMyRank == iRanksQty - 1) {
-        dXToEvaluate = dLowerBound + 10000*dDeltaX;
-        dArea += 4/(1+(float)dXToEvaluate*(float)dXToEvaluate)*dDeltaX;
+        // Trapezoid approximation requires evaluation at both bounds
+        for (int iOffset = 0; iOffset <= 1; iOffset++) {
+            dXToEvaluate = dLowerBound + (float)(iTrapezoidNum+iOffset)*dDeltaX;
+            dArea += 4/(1+(float)dXToEvaluate*(float)dXToEvaluate);
+        }
     }
     MPI_Barrier(MPI_COMM_WORLD);
 
@@ -42,6 +40,9 @@ int main(int argc, char** argv) {
             dArea += dOtherProcessArea;
         }
     }
+    // Reduction of trapezoid approximation performs calculations to all evals
+    dArea *= dDeltaX;
+    dArea /= 2;
 
     // Prints current pi approximation
     if (iMyRank == 0) {
