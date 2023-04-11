@@ -2,6 +2,7 @@
 
 #include <mpi.h>
 #include <stdio.h>
+#include <math.h>  // Use floating abs
 
 int main(int argc, char** argv) {
 
@@ -46,7 +47,9 @@ int main(int argc, char** argv) {
 
     // Prints current pi approximation
     if (iMyRank == 0) {
-        printf("Pi approximation is %.32f\n", dArea);
+        printf("Pi approximation using %d ranks is %.32f\n", iRanksQty, dArea);
+        double dError = fabs(dArea - 3.1415926535897932384626433832795028841971693993751058209749445923);
+        printf("Error is: %.32f\n", dError);
     }
 
     MPI_Finalize();
