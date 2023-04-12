@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
 
     // Prints current pi approximation
     if (iMyRank == 0) {
-        // Reduction of trapezoid approximation performs calculations to all evals
+        // Trapezoid approximation performs calculations to all evals
         dArea *= dDeltaX;
         dArea /= 2;
         printf("Pi approximation using %d ranks is %.32f\n", iRanksQty, dArea);
