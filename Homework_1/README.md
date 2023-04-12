@@ -34,8 +34,6 @@ There were 10 trials executed, where the processes followed the formula Processe
 
 By plotting the error against the processes quantity, it can be seen that the more processes the less the error, at a point that even taking error to logaritmic scale, it is widely noticeable that growing the number of processes will enhance the results.
 
-![image]()
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/18760154/231334251-f539e97c-d47e-4d93-9932-4f8e857f82f5.png" />
 </p>
