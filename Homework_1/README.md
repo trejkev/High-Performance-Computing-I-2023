@@ -14,3 +14,28 @@ $$ \int_{a}^{b}f(x)dx\approx \frac{1}{2}\Delta x\sum_{i=a}^{b-\Delta x}\left [ f
 
 
 Since the system is using a Makefile, running the code is quite simple, use make clean to remove older output files, make lint to check correctness of the syntaxis, make to compile the code, and make run to run the code with 1 process, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile.
+
+## Results
+
+There were 10 trials executed, where the processes followed the formula Processes = 2^n, where N goes from 0 to 9, the results are shown in the table below.
+
+| **Processes** | **Pi approximation** |     **Error**     |
+|:-------------:|:--------------------:|:-----------------:|
+|       1       |   3.14159265192313   | 1.66666280776E-09 |
+|       2       |   3.14159265317314   |  4.1665693118E-10 |
+|       4       |   3.14159265348562   |  1.0417355867E-10 |
+|       8       |   3.14159265356374   |  2.604938487E-11  |
+|       16      |   3.14159265358329   |   6.5067951E-12   |
+|       32      |   3.14159265358816   |   1.62936331E-12  |
+|       64      |   3.14159265358938   |   4.1033843E-13   |
+|      128      |   3.14159265358969   |   1.0036416E-13   |
+|      256      |   3.14159265358977   |    2.442491E-14   |
+|      512      |   3.14159265358979   |    7.10543E-15    |
+
+By plotting the error against the processes quantity, it can be seen that the more processes the less the error, at a point that even taking error to logaritmic scale, it is widely noticeable that growing the number of processes will enhance the results.
+
+![image]()
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/18760154/231334251-f539e97c-d47e-4d93-9932-4f8e857f82f5.png" />
+</p>
