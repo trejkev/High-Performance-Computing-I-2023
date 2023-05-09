@@ -46,4 +46,4 @@ lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
 
 clean:
-	-rm -f ./bin/$(FILENAME)_MPI ./bin/$(FILENAME)_VECTORIZED ./bin/$(FILENAME)_MPI_VECTORIZED
+	-rm -f ./bin/*
