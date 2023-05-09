@@ -12,8 +12,14 @@ The integral computation is performed using the trapezoid approximation, which u
 
 $$ \int_{a}^{b}f(x)dx\approx \frac{1}{2}\Delta x\sum_{i=a}^{b-\Delta x}\left [ f(x_{i}) + f(x_{i} + \Delta x) \right ] $$
 
+For this homework, the focus was not the measurement of the error reduction, it was already demonstrated in Homework 1, thus, for this homework, the focus was to modify the code to make is suitable for MPI + Vectorization, and also full vectorization, and then compare how long it takes for the three different configurations to complete the execution cycle.
 
-Since the system is using a Makefile, running the code is quite simple, use make clean to remove older output files, make lint to check correctness of the syntaxis, make to compile the code, and make run to run the code with 1 process, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile.
+Since the system is using a Makefile, running the code is quite simple, use make clean to remove older output files, make lint to check correctness of the syntaxis, and then, depending on what you want, you may need to chose one of the following options
+  - MPI only: Run make PiApproximator_MPI, and then make run_MPI.
+  - MPI + Vectorization: Run make PiApproximator_MPI_VECTORIZED, and then make run_MPI_VECTORIZED.
+  - Vectorization only: Run make PiApproximator_VECTORIZED, and then make run_VECTORIZED.
+
+When using MPI, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile. In the case of vectorization only, you will need to modify TRAPEZOIDSSQTY variable to set the quantity of trapezoids to be used to average pi.
 
 ## Results
 
