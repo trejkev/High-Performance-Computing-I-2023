@@ -19,7 +19,7 @@ Since the system is using a Makefile, running the code is quite simple, use make
   - MPI + Vectorization: Run make PiApproximator_MPI_VECTORIZED, and then make run_MPI_VECTORIZED.
   - Vectorization only: Run make PiApproximator_VECTORIZED, and then make run_VECTORIZED.
 
-When using MPI, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile. In the case of vectorization only, you will need to modify TRAPEZOIDSSQTY variable to set the quantity of trapezoids to be used to average pi.
+When using MPI, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile. In the case of vectorization only, you will need to modify TRAPEZOIDSQTY variable to set the quantity of trapezoids to be used to average pi.
 
 ## Results
 
