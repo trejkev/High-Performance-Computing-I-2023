@@ -5,7 +5,6 @@
 #include <time.h>  // To deal with delta time measurements
 
 int main(int argc, char** argv) {
-
     // Gets initial time reading
     float start_time = clock();
 
@@ -48,5 +47,4 @@ int main(int argc, char** argv) {
     // Computing elapsed time
     float fElapsedTime = (float)(finish_time - start_time)/CLOCKS_PER_SEC;
     printf("Elapsed time: %.9lf s\n", fElapsedTime);
-
 }

@@ -6,7 +6,6 @@
 #include <time.h>  // To deal with delta time measurements
 
 int main(int argc, char** argv) {
-
     // Gets initial time reading
     float start_time = clock();
 
