@@ -3,7 +3,8 @@ MPI_COMPILER  = mpicc
 GNU_COMPILER  = gcc
 PROCESSES     = 64
 SOURCES       = ./src/*.c
-TRAPEZOIDSQTY = 500
+TRAPEZOIDSQTY = 640000
+REPEAT        = 300
 
 
 LINTFILTERS = $\
@@ -24,6 +25,8 @@ VECTORIZATIONFLAGS = $\
 	-fopt-info-vec-optimized $\
 	-fopt-info-vec-missed
 
+$(FILENAME): $(FILENAME)_MPI $(FILENAME)_MPI_VECTORIZED $(FILENAME)_VECTORIZED
+
 $(FILENAME)_MPI:
 	$(MPI_COMPILER) ./src/$(FILENAME).c -o ./bin/$(FILENAME)_MPI
 
@@ -34,13 +37,13 @@ $(FILENAME)_VECTORIZED:
 	$(GNU_COMPILER) ./src/$(FILENAME)VectorizationCompliant.c $(VECTORIZATIONFLAGS) -o ./bin/$(FILENAME)_VECTORIZED
 
 run_MPI:
-	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)_MPI
+	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)_MPI $(REPEAT)
 
 run_MPI_VECTORIZED:
-	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)_MPI_VECTORIZED
+	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)_MPI_VECTORIZED $(REPEAT)
 
 run_VECTORIZED:
-	./bin/$(FILENAME)_VECTORIZED $(TRAPEZOIDSQTY)
+	./bin/$(FILENAME)_VECTORIZED $(TRAPEZOIDSQTY) $(REPEAT)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
