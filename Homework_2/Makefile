@@ -1,9 +1,9 @@
-FILENAME     = PiApproximator
-MPI_COMPILER = mpicc
-GNU_COMPILER = gcc
-PROCESSES    = 64
-SOURCES      = ./src/*.c
-COLSQTY      = 500
+FILENAME      = PiApproximator
+MPI_COMPILER  = mpicc
+GNU_COMPILER  = gcc
+PROCESSES     = 64
+SOURCES       = ./src/*.c
+TRAPEZOIDSQTY = 500
 
 
 LINTFILTERS = $\
@@ -40,7 +40,7 @@ run_MPI_VECTORIZED:
 	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)_MPI_VECTORIZED
 
 run_VECTORIZED:
-	./bin/$(FILENAME)_VECTORIZED $(COLSQTY)
+	./bin/$(FILENAME)_VECTORIZED $(TRAPEZOIDSQTY)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
