@@ -18,28 +18,22 @@ Since the system is using a Makefile, running the code is quite simple, use make
   - MPI only: Run make PiApproximator_MPI, and then make run_MPI.
   - MPI + Vectorization: Run make PiApproximator_MPI_VECTORIZED, and then make run_MPI_VECTORIZED.
   - Vectorization only: Run make PiApproximator_VECTORIZED, and then make run_VECTORIZED.
+  - Make all: Simply run make, and then run_{MPI, MPI_VECTORIZED, VECTORIZED}
 
-When using MPI, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile. In the case of vectorization only, you will need to modify TRAPEZOIDSQTY variable to set the quantity of trapezoids to be used to average pi.
+Makefile notes:
+  - When using MPI, to change the quantity of processes you will need to modify the PROCESSES variable into the Makefile. 
+  - In the case of vectorization only, you will need to modify TRAPEZOIDSQTY variable to set the quantity of trapezoids to be used to average pi. 
+  - To make a valid comparison between MPI, VECTORIZED, or their mixture, TRAPEZOIDSQTY should be 10,000 times PROCESSES.
+  - If the user wants to run the test N times, this can be done by modifying the variable REPEAT in the Makefile.
 
 ## Results
 
-There were 10 trials executed, where the processes followed the formula Processes = 2^n, where N goes from 0 to 9, the results are shown in the table below.
-
-| **Processes** | **Pi approximation** |     **Error**     |
-|:-------------:|:--------------------:|:-----------------:|
-|       1       |   3.14159265192313   | 1.66666280776E-09 |
-|       2       |   3.14159265317314   |  4.1665693118E-10 |
-|       4       |   3.14159265348562   |  1.0417355867E-10 |
-|       8       |   3.14159265356374   |  2.604938487E-11  |
-|       16      |   3.14159265358329   |   6.5067951E-12   |
-|       32      |   3.14159265358816   |   1.62936331E-12  |
-|       64      |   3.14159265358938   |   4.1033843E-13   |
-|      128      |   3.14159265358969   |   1.0036416E-13   |
-|      256      |   3.14159265358977   |    2.442491E-14   |
-|      512      |   3.14159265358979   |    7.10543E-15    |
-
-By plotting the error against the processes quantity, it can be seen that the more processes the less the error, at a point that even taking error to logaritmic scale, it is widely noticeable that growing the number of processes will enhance the results.
+There were 300 trials executed using  64 processes, and in the case of only vectorization, a total of 640,000 trapezoids, which is equivalent in computational effort. The data can be found into results directory, the raw data for elapsed time was plotted together with an individual value plot, and the resulting graph is shown below.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/18760154/231334972-2eeba1e1-035a-49ab-9233-ad6cc813f2f1.png" />
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/07dd9ce1-e967-470f-a211-3b13c314fa8d" />
 </p>
+
+As you can tell, vectorized version of MPI trends to late for shorter time, compared to its non-vectorized version, but only vectorization commpared to MPI and MPI vectorized trends to late for longer timme than the both that were using MPI, and this can be pointed to two main reasons:
+  - The compiler, they both are using different compilers, and this may be giving different asm code to be run, perhaps MPI code is more optimized.
+  - The CPUs usage, even when MPI is made to be run in a cluster, in this case the tests were executed in a single computer, thus there is no latency reduction because of the network communications, resulting simply in a 64-core concurrent (and even vectorized) execution of 10,000 cycles, versus a sequential execution of 640,000 cycles.
