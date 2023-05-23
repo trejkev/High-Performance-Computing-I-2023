@@ -1,7 +1,7 @@
 FILENAME      = PMatricesVectorialMultiplier
 GNU_COMPILER  = gcc
 SOURCES       = ./src/*.c
-REPEAT        = 300
+REPEAT        = 10
 
 
 LINTFILTERS = $\
@@ -11,11 +11,19 @@ LINTFILTERS = $\
 	-readability/casting,$\
 	-runtime/references
 
-$(FILENAME): clean
-	$(GNU_COMPILER) -fopenmp $(SOURCES) -o ./bin/$(FILENAME)
+$(FILENAME): clean PMatricesVectorialMultiplier_parallel PMatricesVectorialMultiplier_sequential
 
-run:
-	./bin/$(FILENAME)
+$(FILENAME)_parallel:
+	$(GNU_COMPILER) -fopenmp $(SOURCES) -o ./bin/$(FILENAME)_parallel
+
+$(FILENAME)_sequential:
+	$(GNU_COMPILER) $(SOURCES) -o ./bin/$(FILENAME)_sequential
+
+run_parallel:
+	./bin/$(FILENAME)_parallel $(REPEAT)
+
+run_sequential:
+	./bin/$(FILENAME)_sequential $(REPEAT)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
