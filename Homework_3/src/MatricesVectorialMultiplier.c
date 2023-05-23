@@ -50,7 +50,6 @@ int main(int argc, char** argv) {
             for (j = 0; j < Mdim ; j++) {
                 double tmp = 0;
                     for (k = 0; k < Pdim ; k++) {
-                        /* C (i , j ) = sum ( over k ) A (i , k ) * B (k , j ) */
                         tmp += *(A+(i*Pdim+k)) * *(B+(k*Mdim+j)); // Same as tmp += A[i*Pdim+k] * B[k*Mdim+j];
                     }
                 C[i*Mdim+j] = tmp;
