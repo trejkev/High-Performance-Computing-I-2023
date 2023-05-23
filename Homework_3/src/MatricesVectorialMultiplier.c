@@ -1,3 +1,5 @@
+// Copyright 2023 Kevin Trejos Vargas <kevin.trejosvargas@ucr.ac.cr>
+
 #include <omp.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,8 +40,7 @@ int main(int argc, char** argv) {
 
     size_t i, j, k;
 
-    for (size_t replica = 0; replica < replicas; ++replica){
-
+    for (size_t replica = 0; replica < replicas; ++replica) {
         float start_time = clock();
 
         // Ndim for rows in A
@@ -50,7 +51,8 @@ int main(int argc, char** argv) {
             for (j = 0; j < Mdim ; j++) {
                 double tmp = 0;
                     for (k = 0; k < Pdim ; k++) {
-                        tmp += *(A+(i*Pdim+k)) * *(B+(k*Mdim+j)); // Same as tmp += A[i*Pdim+k] * B[k*Mdim+j];
+                        // Same as tmp += A[i*Pdim+k] * B[k*Mdim+j];
+                        tmp += *(A+(i*Pdim+k)) * *(B+(k*Mdim+j));
                     }
                 C[i*Mdim+j] = tmp;
             }
