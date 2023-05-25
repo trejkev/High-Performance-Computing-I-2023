@@ -1,10 +1,10 @@
-FILENAME      = PMatricesVectorialMultiplier
+FILENAME      = MatricesVectorialMultiplier
 GNU_COMPILER  = gcc
 SOURCES       = ./src/*.c
 REPEAT        = 10
-AROWS         = 50
-BCOLS         = 30
-ACOLS_BROWS   = 20
+AROWS         = 5
+BCOLS         = 3
+ACOLS_BROWS   = 7
 
 
 LINTFILTERS = $\
@@ -14,7 +14,7 @@ LINTFILTERS = $\
 	-readability/casting,$\
 	-runtime/references
 
-$(FILENAME): clean PMatricesVectorialMultiplier_parallel PMatricesVectorialMultiplier_sequential
+$(FILENAME): clean MatricesVectorialMultiplier_parallel MatricesVectorialMultiplier_sequential
 
 $(FILENAME)_parallel:
 	$(GNU_COMPILER) -fopenmp $(SOURCES) -o ./bin/$(FILENAME)_parallel
