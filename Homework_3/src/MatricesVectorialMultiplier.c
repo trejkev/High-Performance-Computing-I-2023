@@ -9,52 +9,111 @@
 // Code to Perform C = AxB
 int main(int argc, char** argv) {
     size_t replicas;
-    if (argc == 2) {
+    size_t rowsOfA;  // Number of rows in A
+    size_t colsOfB;  // Number of columns in B
+    size_t colsOfA_rowsOfB;  // Number of columns in matrix A = rows in matrix B
+    if (argc == 5) {
         if (sscanf(argv[1], "%zu", &replicas) != 1 || errno) {
             fprintf(stderr, "Invalid number of replicas.\n");
             return EXIT_FAILURE;
         }
+        if (sscanf(argv[2], "%zu", &rowsOfA) != 1 || errno) {
+            fprintf(stderr, "Invalid rows for A.\n");
+            return EXIT_FAILURE;
+        }
+        if (sscanf(argv[3], "%zu", &colsOfB) != 1 || errno) {
+            fprintf(stderr, "Invalid cols for B.\n");
+            return EXIT_FAILURE;
+        }
+        if (sscanf(argv[4], "%zu", &colsOfA_rowsOfB) != 1 || errno) {
+            fprintf(stderr, "Invalid cols for A / rows for B.\n");
+            return EXIT_FAILURE;
+        }
+    } else {
+        fprintf(stderr, "Invalid number of arguments.\n");
+        return EXIT_FAILURE;
     }
-    size_t Ndim = 3;  // Number of rows in A
-    size_t Mdim = 4;  // Number of columns in B
-    size_t Pdim = 5;  // Number of columns in matrix A = rows in matrix B
+    printf("Replicas: %zu\n", replicas);
+    printf("Rows for A: %zu\n", rowsOfA);
+    printf("Cols for B: %zu\n", colsOfB);
+    printf("Cols for A / Rows for B: %zu\n", colsOfA_rowsOfB);
+    size_t row, col;
 
-    // Matrix A values
-    double A[] = {
-        1 , 2 , 3 , 4 , 5 ,
-        6 , 7 , 8 , 9 , 10,
-        11, 12, 13, 14, 15
-    };
+    // Allocate memory for matrix A and its values
+    size_t** A = (size_t**)calloc(rowsOfA, sizeof(size_t*));
+    if (A == NULL) {
+        return 1;
+    }
+    for (row = 0; row < rowsOfA; row++) {
+        if ( (A[row] = (size_t*)calloc(colsOfA_rowsOfB, sizeof(size_t))) == NULL) {
+            for (int rowToBeFreed = 0; rowToBeFreed <= row; rowToBeFreed++) {
+                free(A[rowToBeFreed]);
+            }
+            free(A);
+            return 1;
+        }
+    }
+    // Assign random values to matrix A cells
+    size_t upper = 100;
+    size_t lower = 0;
+    for (row = 0; row < rowsOfA; row++) {
+        for(col = 0; col < colsOfA_rowsOfB; col++) {
+            A[row][col] =  (size_t)(rand() % (upper - lower + 1)) + lower;
+        }
+    }
 
-    // Matrix B values
-    double B[] = {
-        20, 19, 18, 17,
-        16, 15, 14, 13,
-        12, 11, 10, 9 ,
-        8 , 7 , 6 , 5 ,
-        4 , 3 , 2 , 1
-    };
+    // Allocate memory for matrix B and its values
+    size_t** B = (size_t**)calloc(colsOfA_rowsOfB, sizeof(size_t*));
+    if (B == NULL) {
+        return 1;
+    }
+    for (row = 0; row < colsOfA_rowsOfB; ++row) {
+        if ( (B[row] = (size_t*)calloc(colsOfB, sizeof(size_t))) == NULL) {
+            for (int rowToBeFreed = 0; rowToBeFreed <= row; ++rowToBeFreed) {
+                free(B[rowToBeFreed]);
+            }
+            free(B);
+            return 1;
+        }
+    }
+    // Assign random values to matrix B cells
+    upper = 100;
+    lower = 0;
+    for (row = 0; row < colsOfA_rowsOfB; row++) {
+        for(col = 0; col < colsOfB; col++) {
+            B[row][col] =  (rand() % (upper - lower + 1)) + lower;
+        }
+    }
 
     // Allocate memory for resulting matrix
-    double* C = (double*)malloc(Ndim * Mdim * sizeof(double));
+    size_t** C = (size_t**)calloc(rowsOfA, sizeof(size_t*));
+    if( C == NULL) {
+        free(C);
+        return 1;
+    }
+    for (row = 0; row < rowsOfA; row++) {
+        if ( (C[row] = (size_t*)calloc(colsOfB, sizeof(size_t))) == NULL) {
+            for (int rowToBeFreed = 0; rowToBeFreed <= row; rowToBeFreed++) {
+                free(C[rowToBeFreed]);
+            }
+            free(C);
+            return 1;
+        }
+    }
 
-    size_t i, j, k;
+    size_t rowA, colB, colA_rowB;
 
     for (size_t replica = 0; replica < replicas; ++replica) {
         float start_time = clock();
 
-        // Ndim for rows in A
-        // Mdim for cols in B
-        // Pdim for columns in A = rows in B
-        #pragma omp parallel for private(i, j, k) shared(A, B, C)
-        for (i = 0; i < Ndim ; i++) {
-            for (j = 0; j < Mdim ; j++) {
-                double tmp = 0;
-                    for (k = 0; k < Pdim ; k++) {
-                        // Same as tmp += A[i*Pdim+k] * B[k*Mdim+j];
-                        tmp += *(A+(i*Pdim+k)) * *(B+(k*Mdim+j));
-                    }
-                C[i*Mdim+j] = tmp;
+        #pragma omp parallel for private(rowA, colB, colA_rowB) shared(A, B, C)
+        for (rowA = 0; rowA < rowsOfA ; rowA++) {
+            for (colB = 0; colB < colsOfB ; colB++) {
+                size_t tmp = 0;
+                for (colA_rowB = 0; colA_rowB < colsOfA_rowsOfB ; colA_rowB++) {
+                    tmp += A[rowA][colA_rowB] * B[colA_rowB][colB];
+                }
+                C[rowA][colB] = tmp;
             }
         }
 
@@ -64,14 +123,46 @@ int main(int argc, char** argv) {
         // Print the result matrix
         printf("%zu - Elapsed time: %.9lf\n", replica, fElapsedTime);
     }
-    printf("Result:\n");
-    for (size_t i = 0; i < Ndim; i++) {
-        for (size_t j = 0; j < Mdim; j++) {
-            printf("%.2f ", *(C + (i * Ndim + j)));
+
+    printf("\nMatrix A:\n");
+    for (row = 0; row < rowsOfA; row++) {
+        for (col = 0; col < colsOfA_rowsOfB; col++) {
+            printf("%zu, ", A[row][col]);
+        }
+        printf("\n");
+    }
+    printf("\nMatrix B:\n");
+    for (row = 0; row < colsOfA_rowsOfB; row++) {
+        for (col = 0; col < colsOfB; col++) {
+            printf("%zu, ", B[row][col]);
+        }
+        printf("\n");
+    }
+
+    printf("\nResult:\n");
+    for (size_t row = 0; row < rowsOfA; row++) {
+        for (size_t col = 0; col < colsOfB; col++) {
+            printf("%zu, ", C[row][col]);
         }
         printf("\n");
     }
 
     // Free the allocated memory
+    for (row = 0; row < rowsOfA; row++) {
+        free(A[row]);
+    }
+    free(A);
+    printf("Freed A\n");
+
+    for (row = 0; row < colsOfA_rowsOfB; row++) {
+        free(B[row]);
+    }
+    free(B);
+    printf("Freed B\n");
+    
+    for (row = 0; row < rowsOfA; row++) {
+        free(C[row]);
+    }
     free(C);
+    printf("Freed C\n");
 }
