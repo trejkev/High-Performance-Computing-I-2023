@@ -2,7 +2,7 @@
 
 This homework consisted in the creation of a matrices vectorial product calculator, it creates two matrices of dimensions defined by AROWS, BCOLS, and ACOLS_BROWS in the Makefile, with randomized integer values between 0 and 100, and computes, sequentially and concurrently the code, depending if -fopenmp flag is used while compiling.
 
-The equation to compute is the following: $A x B = C$
+The equation to compute is the following: $A \times B = C$
 
 It also provides you with a way to repeat the computation N times, just by modifying the variable REPEAT into the Makefile.
 
