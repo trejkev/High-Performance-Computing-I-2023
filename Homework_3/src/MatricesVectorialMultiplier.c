@@ -6,6 +6,9 @@
 #include <time.h>  // To deal with delta time measurements
 #include <errno.h>
 
+#define UPPER 100
+#define LOWER 0
+
 // Code to Perform C = AxB
 int main(int argc, char** argv) {
     size_t replicas;
@@ -54,11 +57,9 @@ int main(int argc, char** argv) {
         }
     }
     // Assign random values to matrix A cells
-    size_t upper = 100;
-    size_t lower = 0;
     for (row = 0; row < rowsOfA; row++) {
         for(col = 0; col < colsOfA_rowsOfB; col++) {
-            A[row][col] =  (size_t)(rand() % (upper - lower + 1)) + lower;
+            A[row][col] =  (size_t)(rand() % (UPPER - LOWER + 1)) + LOWER;
         }
     }
 
@@ -77,11 +78,9 @@ int main(int argc, char** argv) {
         }
     }
     // Assign random values to matrix B cells
-    upper = 100;
-    lower = 0;
     for (row = 0; row < colsOfA_rowsOfB; row++) {
         for(col = 0; col < colsOfB; col++) {
-            B[row][col] =  (rand() % (upper - lower + 1)) + lower;
+            B[row][col] =  (rand() % (UPPER - LOWER + 1)) + LOWER;
         }
     }
 
