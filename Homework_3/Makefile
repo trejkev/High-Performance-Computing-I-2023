@@ -2,6 +2,9 @@ FILENAME      = PMatricesVectorialMultiplier
 GNU_COMPILER  = gcc
 SOURCES       = ./src/*.c
 REPEAT        = 10
+AROWS         = 50
+BCOLS         = 30
+ACOLS_BROWS   = 20
 
 
 LINTFILTERS = $\
@@ -20,10 +23,10 @@ $(FILENAME)_sequential:
 	$(GNU_COMPILER) $(SOURCES) -o ./bin/$(FILENAME)_sequential
 
 run_parallel:
-	./bin/$(FILENAME)_parallel $(REPEAT)
+	./bin/$(FILENAME)_parallel $(REPEAT) $(AROWS) $(BCOLS) $(ACOLS_BROWS)
 
 run_sequential:
-	./bin/$(FILENAME)_sequential $(REPEAT)
+	./bin/$(FILENAME)_sequential $(REPEAT) $(AROWS) $(BCOLS) $(ACOLS_BROWS)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
