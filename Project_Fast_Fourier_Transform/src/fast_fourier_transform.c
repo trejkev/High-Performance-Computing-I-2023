@@ -1,27 +1,22 @@
 // Copyright 2023 Kevin Trejos Vargas <kevin.trejosvargas@ucr.ac.cr>
 
-/* This code is designed to compute a sequential version of the fast
- * fourier transformation, of a sound pressure reading saved into a buffer.
- */
-
 #include <stdio.h>
 #include <stdlib.h> // Deals with dynamic memory
 #include <linux/limits.h>
-// #include <mpi.h>
-// #include <omp.h>
-// #include <string.h>
-// #include <unistd.h>  // Enables the use of sysconf
+#include <complex.h>
+
 // #include <math.h>
 
 #define TRUE 1
 #define FALSE 0
 #define SUCCESS 0
 #define FAIL 0
+#define PI 3.1415926535897932384626433832795028841971693993751058209749445923
 
 int main(int argc, char *argv[]) {
     FILE *fptr;
     char *sFileName;
-    float *fSamplesBuffer;
+    float complex *fcSamplesBuffer;
     size_t iThreadsQty, iReplicas;
     size_t iSamplingFrequency, iSamplesQty;
     size_t iNyquistLimit;
@@ -61,33 +56,24 @@ int main(int argc, char *argv[]) {
                 fscanf(fptr, "%zu", &iSamplesQty);
                 printf("Samples quantity: %zu\n", iSamplesQty);
                 iInputFileLength += iSamplesQty;
-                fSamplesBuffer = (float*)calloc(iSamplesQty, sizeof(float));
+                fcSamplesBuffer =
+                    (float complex*)calloc(iSamplesQty, sizeof(float complex));
             } else {
                 float auxSaver;
                 fscanf(fptr, "%f", &auxSaver);
-                fSamplesBuffer[iLineCounter-2] = auxSaver;
+                fcSamplesBuffer[iLineCounter-2] = auxSaver + 0.0 * I;
             }
             iLineCounter++;
         }
         printf("Samples are: \n");
         for (int iSample = 0; iSample < iSamplesQty; iSample++) {
-            printf("    Sample %d: %f\n", iSample, fSamplesBuffer[iSample]);
+            printf("    Sample %d: %f + %fi\n", iSample, 
+                creal(fcSamplesBuffer[iSample]),
+                cimag(fcSamplesBuffer[iSample]));
         }
     }
     fclose(fptr);
-
-    // Execute the code N times
-    for (int iReplica = 0; iReplica < iReplicas; iReplica++) {
-
-        iReplica += 1;
-    }
-
-
-
-
-
-
-    free(fSamplesBuffer);
+    free(fcSamplesBuffer);
     free(sFileName);
     return 0;
 }
