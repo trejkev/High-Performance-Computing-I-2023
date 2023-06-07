@@ -12,9 +12,13 @@
 #define FALSE 0
 #define SUCCESS 0
 #define FAIL 0
-#define PI 3.1415926535897932384626433832795028841971693993751058209749445923
+#ifndef PI
+    #define PI 3.1415926535897932384626433832795028841971693993751058209749445923
+#endif
 
-float complex* fastFourierTransform(apr_pool_t* pool, float complex* samples, size_t iSamplesQty);
+apr_pool_t* aprMemoryPool;
+
+float complex* fastFourierTransform(float complex* samples, size_t iSamplesQty);
 
 int main(int argc, char *argv[]) {
     FILE *fptr;
@@ -26,7 +30,6 @@ int main(int argc, char *argv[]) {
 
     // Create the memory pool
     apr_initialize();
-    apr_pool_t* aprMemoryPool;
     apr_pool_create(&aprMemoryPool, NULL);
     
 
@@ -90,22 +93,25 @@ int main(int argc, char *argv[]) {
 
 
     float complex* fcSpectrum =
-        fastFourierTransform(aprMemoryPool, fcSamplesBuffer, iSamplesQty);
+        fastFourierTransform(fcSamplesBuffer, iSamplesQty);
 
     printf("Fast Fourier Transform coefficients:\n");
+    fptr = fopen("./results/results.csv", "w");
     for (size_t iSample = 0; iSample < iSamplesQty; iSample++) {
         float fReal = creal(fcSpectrum[iSample])/iSamplesQty;
         float fImag = cimag(fcSpectrum[iSample])/iSamplesQty;
         float fAngle = carg(fcSpectrum[iSample]);
         float fAmplitude = sqrt(fReal*fReal + fImag*fImag);
-        printf("F[%zu Hz] = %.4f + %.4fi -> amplitude = %.4f, angle %.4f rad\n",
+        printf("F[%zu Hz] = %.8f + %.8fi -> amplitude = %.8f, angle %.8f rad\n",
+        iSample + 1, fReal, fImag, fAmplitude, fAngle);
+        fprintf(fptr, "%zu;%.8f;%.8f;%.8f;%.8f\n",
         iSample + 1, fReal, fImag, fAmplitude, fAngle);
     }
 
     if (aprMemoryPool != NULL) {
         printf("Destroy the pool\n");
-        // apr_pool_destroy(aprMemoryPool);
-        // apr_terminate();
+        apr_pool_destroy(aprMemoryPool);
+        apr_terminate();
 
     }
     // free(fcSpectrum); // Comes from memory reserved into FFT
@@ -119,26 +125,16 @@ int main(int argc, char *argv[]) {
 
 
 /* Using Cooley-Tukey algorithm */
-float complex* fastFourierTransform(apr_pool_t* aprPool, float complex* samples, size_t iSamplesQty) {
+float complex* fastFourierTransform(float complex* samples, size_t iSamplesQty) {
     if (iSamplesQty <= 1) {
-        // float complex* fcSpectrum = apr_pcalloc(aprPool, sizeof(float complex));
-        // float complex* fcSpectrum = (float complex*)malloc(sizeof(float complex));
-        // fcSpectrum[0] = samples[0];
-        // printf("Base case\n");
-        // return fcSpectrum;
         return samples;
     }
-    // printf("I am here: samps qty %zu\n", iSamplesQty);
 
     // Allocate memory for even and odd samples
     float complex* fcEvenSamples =
-        apr_pcalloc(aprPool, (iSamplesQty/2)*sizeof(float complex));
-    // float complex* fcEvenSamples =
-    //     (float complex*)malloc((iSamplesQty/2)*sizeof(float complex));
+        apr_pcalloc(aprMemoryPool, (iSamplesQty/2)*sizeof(float complex));
     float complex* fcOddSamples =
-        apr_pcalloc(aprPool, (iSamplesQty/2)*sizeof(float complex));
-    // float complex* fcOddSamples =
-    //     (float complex*)malloc((iSamplesQty/2)*sizeof(float complex));
+        apr_pcalloc(aprMemoryPool, (iSamplesQty/2)*sizeof(float complex));
     
     // Split into even and odd the samples
     for (size_t iSample = 0; iSample < iSamplesQty/2; iSample++) {
@@ -148,17 +144,13 @@ float complex* fastFourierTransform(apr_pool_t* aprPool, float complex* samples,
 
     // Recursively run FFT over smaller samples
     float complex* fcEvenSpectrum =
-        fastFourierTransform(aprPool, fcEvenSamples, iSamplesQty/2);
-    // printf("Just ran even for %zu samples\n", iSamplesQty);
+        fastFourierTransform(fcEvenSamples, iSamplesQty/2);
     float complex* fcOddSpectrum =
-        fastFourierTransform(aprPool, fcOddSamples, iSamplesQty/2);
-    // printf("Just ran odd for %zu samples\n", iSamplesQty);
+        fastFourierTransform(fcOddSamples, iSamplesQty/2);
 
     // Combine even and odd results
     float complex* fcSpectrum =
-        apr_pcalloc(aprPool, (iSamplesQty + 2)*sizeof(float complex));
-    // float complex* fcSpectrum =
-    //     (float complex*)malloc(iSamplesQty*sizeof(float complex));
+        apr_pcalloc(aprMemoryPool, (iSamplesQty + 2)*sizeof(float complex));
     for (size_t iSample = 0; iSample < iSamplesQty; iSample++) {
         float complex fcComplexEuler =
             cexp(-I * 2 * PI * iSample/iSamplesQty) * fcOddSpectrum[iSample];
@@ -167,12 +159,5 @@ float complex* fastFourierTransform(apr_pool_t* aprPool, float complex* samples,
             fcEvenSpectrum[iSample] - fcComplexEuler;
     }
 
-
-    // printf("Samples: %zu\n", iSamplesQty);
-
-    // free(fcEvenSamples);
-    // free(fcOddSamples);
-    // free(fcEvenSpectrum);
-    // free(fcOddSpectrum);
     return fcSpectrum;
 }
