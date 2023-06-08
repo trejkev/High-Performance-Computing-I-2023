@@ -3,7 +3,7 @@
 #include <math.h>
 
 #ifndef PI
-    #define PI 3.1415926535897932384626433832795028841971693993751058209749445923
+#define PI 3.1415926535897932384626433832795028841971693993751058209749445923
 #endif
 
 int main(int argc, char *argv[]) {
@@ -18,8 +18,9 @@ int main(int argc, char *argv[]) {
         fprintf(fptr, "%zu\n", iSamples);
         fprintf(fptr, "%zu\n", iSamples);
         for (int iCounter = 0; iCounter < iSamples; iCounter++) {
-            float fSample = 2 + 0.5*sin(2*PI*iCounter/iSamples) +
-                0.3*cos(2*PI*iCounter/iSamples+0.3);
+            float fTime = (float)iCounter/iSamples;
+            float fSample = sin(2*PI*50*fTime) +
+                sin(2*PI*20*fTime);
             fprintf(fptr, "%f\n", fSample);
         }
     } else {
