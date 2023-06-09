@@ -87,6 +87,8 @@ int main(int argc, char *argv[]) {
         cSpectrum = 
             discreteFourierTransform(fSamplesBuffer, iSamplesQty, lTimes);
         lTimes[4] = timeReader();
+        printf("        DFT elapsed time: %.9f seconds\n",
+            (float)(lTimes[4] - lTimes[3])/1000000000L);
 
         // ------------------------- //
         // -- EXHIBIT THE RESULTS -- //
