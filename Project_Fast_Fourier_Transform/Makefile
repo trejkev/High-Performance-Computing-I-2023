@@ -47,4 +47,4 @@ lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
 
 clean:
-	-rm -f ./bin/*
+	-rm -f ./bin/* ./test/*
