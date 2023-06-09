@@ -2,27 +2,24 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <linux/limits.h>
-#include <complex.h>
-
 #include <math.h>
+#include <time.h>
 
-#define TRUE 1
-#define FALSE 0
 #define SUCCESS 0
 #define FAIL 0
 
-#ifndef PI
-#define PI 3.1415926535897932384626433832795028841971693993751058209749445923
-#endif
+typedef struct {
+    float real;
+    float imag;
+} Complex;
 
-float complex*
-    fastFourierTransform(float complex* fcSampledSignal, size_t iSamplesQty);
+Complex*
+    discreteFourierTransform(float* cSampledSignal, size_t iSamplesQty);
 
 int main(int argc, char *argv[]) {
     FILE *fptr;
     char *sFileName;
-    float complex* fcSamplesBuffer;
+    float* fSamplesBuffer;
     size_t iThreadsQty, iReplicas;
     size_t iSamplingFrequency, iSamplesQty;
     size_t iNyquistLimit;
@@ -49,7 +46,7 @@ int main(int argc, char *argv[]) {
     // --------------------- //
     if ((fptr = fopen(sFileName, "r")) == NULL) {
         printf("Error opening file %s\n", sFileName);
-        return FALSE;
+        return FAIL;
     } else {
         int iLineCounter = 0;
         int iInputFileLength = 3;
@@ -62,146 +59,73 @@ int main(int argc, char *argv[]) {
                 printf("Samples quantity: %zu\n", iSamplesQty);
                 iInputFileLength += iSamplesQty;
                 iNyquistLimit = iSamplesQty/2;
-                fcSamplesBuffer =
-                    (float complex*)calloc(iSamplesQty, sizeof(float complex));
+                fSamplesBuffer =
+                    (float*)calloc(iSamplesQty, sizeof(float));
             } else {
                 float auxSaver;
                 fscanf(fptr, "%f", &auxSaver);
-                fcSamplesBuffer[iLineCounter-2] = auxSaver + 0.0 * I;
+                fSamplesBuffer[iLineCounter-2] = auxSaver;
             }
             iLineCounter++;
         }
         printf("Samples are: \n");
         for (size_t iSample = 0; iSample < iSamplesQty; iSample++) {
-            printf("    Sample %zu: %f + %fi\n", iSample, 
-                creal(fcSamplesBuffer[iSample]),
-                cimag(fcSamplesBuffer[iSample]));
+            printf("    Sample %zu: %f\n", iSample, fSamplesBuffer[iSample]);
         }
     }
     fclose(fptr);
 
-    // Compute the FFT
-    float complex* fcSpectrum =
-        fastFourierTransform(fcSamplesBuffer, iSamplesQty);
+    // --------------------- //
+    // -- COMPUTE THE DFT -- //
+    // --------------------- //
+    Complex* cSpectrum =
+        discreteFourierTransform(fSamplesBuffer, iSamplesQty);
 
+    // ------------------------- //
+    // -- EXHIBIT THE RESULTS -- //
+    // ------------------------- //
     printf("Fast Fourier Transform coefficients:\n");
     fptr = fopen("./results/results.csv", "w");
-    for (size_t iSample = 0; iSample < iSamplesQty; iSample++) {
-        float fReal = creal(fcSpectrum[iSample])/iNyquistLimit;
-        float fImag = cimag(fcSpectrum[iSample])/iNyquistLimit;
-        float fAngle = carg(fcSpectrum[iSample]);
-        float fAmplitude = sqrt(fReal*fReal + fImag*fImag);
-        printf("F[%zu Hz] = %.8f + %.8fi -> amplitude = %.8f, angle %.8f rad\n",
-        iSample + 1, fReal, fImag, fAmplitude, fAngle);
-        fprintf(fptr, "%zu;%.8f;%.8f;%.8f;%.8f\n",
-        iSample + 1, fReal, fImag, fAmplitude, fAngle);
+    fprintf(fptr, "Frequency;Real;Imaginary;Amplitude;Angle\n");
+    for (size_t iFreqComp = 0; iFreqComp < iNyquistLimit; iFreqComp++) {
+        float fFrequency = (float)iFreqComp*(iSamplingFrequency/iSamplesQty);
+        float fAmplitude =
+            sqrt(cSpectrum[iFreqComp].real*cSpectrum[iFreqComp].real +
+            cSpectrum[iFreqComp].imag*cSpectrum[iFreqComp].imag)/iSamplesQty;
+        float fAngle =
+            atan2(cSpectrum[iFreqComp].imag, cSpectrum[iFreqComp].real);
+        printf("F[%.1f Hz] = %.8f + %.8fi -> amplitude = %.8f, angle %.8f rad\n",
+        fFrequency, cSpectrum[iFreqComp].real, cSpectrum[iFreqComp].imag,
+            fAmplitude, fAngle);
+        fprintf(fptr, "%.1f;%.8f;%.8f;%.8f;%.8f\n",
+        fFrequency, cSpectrum[iFreqComp].real, cSpectrum[iFreqComp].imag,
+            fAmplitude, fAngle);
     }
 
-    free(fcSpectrum); // Comes from memory reserved into FFT
-    free(fcSamplesBuffer);
+    // --------------------------- //
+    // -- DEALLOCATE THE MEMORY -- //
+    // --------------------------- //
+    free(cSpectrum); // Comes from memory reserved into FFT
+    free(fSamplesBuffer);
     free(sFileName);
-    return 0;
+
+    return SUCCESS;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //                      ITERATIVE IMPLEMENTATION OF FFT                       //
 ////////////////////////////////////////////////////////////////////////////////
-float complex*
-    fastFourierTransform(float complex* fcSampledSignal, size_t iSamplesQty) {
+Complex* discreteFourierTransform(float* fSampledSignal, size_t iSamplesQty) {
     // FFT frequency components are stored here
-    float complex* fcSpectrum =
-        (float complex*)calloc(iSamplesQty, sizeof(float complex));
+    Complex* cSpectrum = (Complex*)calloc(iSamplesQty, sizeof(Complex));
 
-    // Initialize the spectrum with the sampled input
-    for (size_t iSample = 0; iSample < iSamplesQty; iSample++) {
-        fcSpectrum[iSample] = fcSampledSignal[iSample];
-    }
+    for (size_t iFreqIndex = 0; iFreqIndex < iSamplesQty; iFreqIndex++) {
+        for (size_t iTimeIndex = 0; iTimeIndex < iSamplesQty; iTimeIndex++) {
+            float fAngle = 2.0*M_PI*iFreqIndex*iTimeIndex/iSamplesQty;
+            cSpectrum[iFreqIndex].real += fSampledSignal[iTimeIndex]*cos(fAngle);
+            cSpectrum[iFreqIndex].imag -= fSampledSignal[iTimeIndex]*sin(fAngle);
 
-    // Number of iterations splitting the DFT equation into even and odd
-    size_t iNumStages = log2(iSamplesQty);
-
-    // Iteratively compute the FFT
-    for (size_t iStage = 0; iStage < iNumStages; iStage++) {
-        size_t iGroupsQty = pow(2, iStage);
-        size_t iGroupSize = iSamplesQty/(iGroupsQty*2);
-        for (size_t iGroup = 0; iGroup < iGroupsQty; iGroup++) {
-            for (size_t iGroupElement = 0; iGroupElement < iGroupSize;
-                iGroupElement++) {
-                // Compute complex exponential of the equation
-                float complex fcEuler = cexp(-I*2*PI*iGroup/iSamplesQty);
-
-                // Compute Fourier coefficients
-                size_t iIndex1 = iGroup*2*iGroupSize + iGroupElement;
-                size_t iIndex2 = iIndex1 + iGroupSize;
-                float complex fcTemp = fcSpectrum[iIndex2]*fcEuler;
-                fcSpectrum[iIndex2] = fcSpectrum[iIndex1] - fcTemp;
-                fcSpectrum[iIndex1] = fcSpectrum[iIndex1] + fcTemp;
-            }
         }
     }
-    return fcSpectrum;
+    return cSpectrum;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// /* Using Cooley-Tukey algorithm */
-// float complex* fastFourierTransform(float complex* samples, size_t iSamplesQty, size_t depth) {
-//     if (iSamplesQty <= 1) {
-//         return samples;
-//     }
-
-//     // Allocate memory for even and odd samples
-//     fcEvenPole[depth] = 
-//     // float complex* fcEvenSamples =
-//         apr_pcalloc(aprMemoryPool, (iSamplesQty/2)*sizeof(float complex));
-//     fcOddPole[depth] = 
-//     // float complex* fcOddSamples =
-//         apr_pcalloc(aprMemoryPool, (iSamplesQty/2)*sizeof(float complex));
-    
-//     // Split into even and odd the samples
-//     for (size_t iSample = 0; iSample < iSamplesQty/2; iSample++) {
-//         fcEvenPole[depth][iSample] = samples[2 * iSample];
-//         // fcEvenSamples[iSample] = samples[2 * iSample];
-//         fcOddPole[depth][iSample] = samples[2 * iSample + 1];
-//         // fcOddSamples[iSample] = samples[2 * iSample + 1];
-//     }
-
-//     // Recursively run FFT over smaller samples
-//     float complex* fcEvenSpectrum =
-//         fastFourierTransform(fcEvenPole[depth], iSamplesQty/2, depth + 1);
-//     float complex* fcOddSpectrum =
-//         fastFourierTransform(fcOddPole[depth], iSamplesQty/2, depth + 1);
-
-//     // Combine even and odd results
-//     // float complex* fcSpectrume =
-//     float complex* fcSpectrumPole[depth][0] =
-//         apr_pcalloc(aprMemoryPool, (iSamplesQty + 2)*sizeof(float complex));
-//     for (size_t iSample = 0; iSample < iSamplesQty; iSample++) {
-//         float complex fcComplexEuler =
-//             cexp(-I * 2 * PI * iSample/iSamplesQty) * fcOddSpectrum[iSample];
-//         fcSpectrumPole[depth][iSample] = fcEvenSpectrum[iSample] + fcComplexEuler;
-//         fcSpectrumPole[depth][iSample + iSamplesQty/2] =
-//             fcEvenSpectrum[iSample] - fcComplexEuler;
-//     }
-
-//     return fcSpectrumPole[depth][0];
-// }
