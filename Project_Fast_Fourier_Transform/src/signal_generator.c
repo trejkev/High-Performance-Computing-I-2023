@@ -46,8 +46,8 @@ int main(int argc, char *argv[]) {
                 fSample = sin(2.0*M_PI*1.0*t);
             } else if (strcmp(sDesc, "cos_1Hz") == 0) {
                 fSample = cos(2.0*M_PI*1.0*t);
-            } else if (strcmp(sDesc, "square_200Hz") == 0) {
-                float fHighLvlRange = iSamples/100; // Fundamental freq @ 200 Hz
+            } else if (strcmp(sDesc, "square_50Hz") == 0) {
+                float fHighLvlRange = iSamples/100; // Fundamental freq @ 50 Hz
                 if (iCounter >= iPeriodCycle*fHighLvlRange &&
                     iCounter < (iPeriodCycle + 1)*fHighLvlRange) {
                     fSample = 4;
