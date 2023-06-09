@@ -4,11 +4,11 @@ GNU_COMPILER  = gcc
 PROCESSES     = 64
 THREADS       = 6
 SOURCES       = ./src/*.c
-REPEAT        = 300
+REPEAT        = 1
 FLAGS         = -g -Wall -Wextra -lm
 ASAN_FLAGS    = -fsanitize=address -fno-omit-frame-pointer
 SAMPLING_FREQ = 16384# 2^n = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, ...}
-SIGNAL_DESC   = sin_50Hz_PLUS_sin_450Hz# {sin_50Hz_PLUS_sin_450Hz, 4_PLUS_sin_50Hz_PLUS_sin_450Hz, sin_1Hz, cos_1Hz}
+SIGNAL_DESC   = square_50Hz# {sin_50Hz_PLUS_sin_450Hz, 4_PLUS_sin_50Hz_PLUS_sin_450Hz, sin_1Hz, cos_1Hz, square_50Hz, sawtooth_150Hz}
 LINTFILTERS   = $\
 	-build/c++11,$\
 	-build/header_guard,$\
