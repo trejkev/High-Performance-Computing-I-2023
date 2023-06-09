@@ -31,6 +31,8 @@ int main(int argc, char *argv[]) {
         fprintf(fptr, "%zu\n", iSamples);
         fprintf(fptr, "%zu\n", iSamples);
         float fTimeStep = 1.0/iSamples;
+        size_t iPeriodCycle = 0;
+        float fLastPeak = 0;
         for (size_t iCounter = 0; iCounter < iSamples; iCounter++) {
             float t = iCounter*fTimeStep;
             float fSample;
@@ -44,6 +46,28 @@ int main(int argc, char *argv[]) {
                 fSample = sin(2.0*M_PI*1.0*t);
             } else if (strcmp(sDesc, "cos_1Hz") == 0) {
                 fSample = cos(2.0*M_PI*1.0*t);
+            } else if (strcmp(sDesc, "square_200Hz") == 0) {
+                float fHighLvlRange = iSamples/100; // Fundamental freq @ 200 Hz
+                if (iCounter >= iPeriodCycle*fHighLvlRange &&
+                    iCounter < (iPeriodCycle + 1)*fHighLvlRange) {
+                    fSample = 4;
+                } else if (iCounter >= (iPeriodCycle + 1)*fHighLvlRange &&
+                    iCounter < (iPeriodCycle + 2)*fHighLvlRange){
+                    fSample = 2;
+                } else {
+                    iPeriodCycle += 2;
+                }
+            } else if (strcmp(sDesc, "sawtooth_150Hz") == 0) {
+                float fHighLvlRange = iSamples/300; // Fundamental freq @ 150 Hz
+                if (iCounter >= iPeriodCycle*fHighLvlRange &&
+                    iCounter < (iPeriodCycle + 1)*fHighLvlRange) {
+                    fSample = (float)iCounter*1 - iPeriodCycle*fHighLvlRange;
+                } else if (iCounter >= (iPeriodCycle + 1)*fHighLvlRange &&
+                    iCounter < (iPeriodCycle + 2)*fHighLvlRange){
+                    fSample = -(float)iCounter*1 + (iPeriodCycle + 2)*fHighLvlRange;
+                } else {
+                    iPeriodCycle += 2;
+                }
             } else {
                 printf("    %s is not a valid signal.\n", sDesc);
                 return 1;
@@ -53,6 +77,7 @@ int main(int argc, char *argv[]) {
     } else {
         printf("    Failed to open %s\n", sSignalPath);
     }
+    printf("    Signal Generated!\n");
     free(sSignalPath);
     free(sDesc);
     return 0;
