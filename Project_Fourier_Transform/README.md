@@ -26,6 +26,17 @@ This FFT is a high-valued approach, since high-density signals, $log(n)$ is quit
 
 ## Running the code
 
-1. There is an input file, located in test directory, that mimics a sampled analog signal, the first line represents its samples per second (aka sampling frequency), its second line represents its samples quantity, and from the third line to the very last line represents each of the samples of the signal.
-2. This input file is entered to discrete_fourier_transform code as CLI parameter, which will compute each of the components of the signal in frequency, up to the Nyquist limit, which is the mathematical limit where the signal is mirrored, and is equivalent to the sampling frequency divided by 2.
-3. The output of the code will be a csv file with each component, which can be plotted later, if required.
+Running the code is quite simple, you can use the Makefile provided to reproduce any of the standard scenarios:
+1. To run the code simply execute make, and then make run.
+2. To run the code with Valgrind memory check, simply run make memcheck.
+3. To run the code with Address Sanitizer (aka asan) simply run make asan, and then make run.
+
+Into the makefile are some variables of interest to try with different scenarios, these are enumerated below:
+1. PROCESSES: Unused for now, will bring to the game MPI library to concurrently execute the code with distributed memory.
+2. THREADS: Unused for now, will bring to the game OpenMP to concurrently execute the code with shared memory.
+3. REPEAT: Executes the code N times, and saves the time for each of the trials into a csv file located in the results directory.
+4. SAMPLING_FREQ: This will be the same as samples quantity, and denotes how many samples per second were taken from the original signal.
+5. SIGNAL_DESC: Defines which signal will be sampled, the list of signals available can be found in src/signal_generator.c.
+6. FOURIERTYPE: Defines if FFT or DFT will be executed, it is case sensitive and shall be sent lowercase.
+
+Note: The code will use both, distributed and shared memory concurrency to reduce as much as possible the execution time.
