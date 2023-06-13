@@ -1,26 +1,10 @@
 // Copyright 2023 Kevin Trejos Vargas <kevin.trejosvargas@ucr.ac.cr>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
-
-#define SUCCESS 0
-#define FAIL 0
-
-typedef struct {
-    float real;
-    float imag;
-} Complex;
-
-Complex* discreteFourierTransform(float* fSampledSignal,
-    size_t iSamplesQty, long* lTimes);
-
-long timeReader();
+#include "fourier_transform_main.h"
 
 int main(int argc, char *argv[]) {
     FILE *fptr;
-    char *sFileName, *sDesc;
+    char *sFileName, *sDesc, *sFourierType;
     float* fSamplesBuffer;
     size_t iThreadsQty, iReplicas;
     size_t iSamplingFrequency, iSamplesQty;
@@ -32,14 +16,17 @@ int main(int argc, char *argv[]) {
     // -------------------- //
     // -- GET PARAMETERS -- //
     // -------------------- //
-    if (argc == 4) {
-        sFileName = (char*)calloc(300, sizeof(char));
-        sDesc     = (char*)calloc(300, sizeof(char));
+    if (argc == 7) {
+        signalGenerator(argc, argv);
+        sFileName    = (char*)calloc(300, sizeof(char));
+        sDesc        = (char*)calloc(300, sizeof(char));
+        sFourierType = (char*)calloc(3, sizeof(char));
         sscanf(argv[1], "%s", sDesc);
         snprintf(sFileName, 300*sizeof(char), "%s%s%s",
             "./test/", sDesc, ".txt");
         sscanf(argv[2], "%zu", &iThreadsQty);
         sscanf(argv[3], "%zu", &iReplicas);
+        sscanf(argv[6], "%s", sFourierType);
         printf("    Input parameters:\n");
         printf("        Input file: %s\n", sFileName);
         printf("        Threads quantity: %zu\n", iThreadsQty);
@@ -49,6 +36,7 @@ int main(int argc, char *argv[]) {
         return FAIL;
     }
 
+    // Repeat the FT code and its relevant logs iReplicas times
     for (size_t iReplica = 0; iReplica < iReplicas; iReplica++) {
         printf("    Replica %zu\n", iReplica);
         // --------------------- //
@@ -84,43 +72,50 @@ int main(int argc, char *argv[]) {
         // -- COMPUTE THE DFT -- //
         // --------------------- //
         lTimes[3] = timeReader();
-        cSpectrum =
-            discreteFourierTransform(fSamplesBuffer, iSamplesQty, lTimes);
+        if (strcmp(sFourierType, "dft") == 0) {
+            cSpectrum =
+                dft(fSamplesBuffer, iSamplesQty, lTimes);
+        } else if (strcmp(sFourierType, "fft") == 0) {
+            cSpectrum = fft_preprocessor(fSamplesBuffer, iSamplesQty, lTimes);
+        } else {
+            printf("%s is not a valid fourier transform\n", sFourierType);
+            return FAIL;
+        }
         lTimes[4] = timeReader();
-        printf("        DFT elapsed time: %.9f seconds\n",
+        printf("        %s elapsed time: %.9f seconds\n", sFourierType,
             (float)(lTimes[4] - lTimes[3])/1000000000L);
 
         // ------------------------- //
         // -- EXHIBIT THE RESULTS -- //
         // ------------------------- //
         char *sResultsFileName = (char*)calloc(300, sizeof(char));
-        snprintf(sResultsFileName, 300*sizeof(char), "%s%s%s%zu%s%zu%s",
-            "./results/DFT_Results_", sDesc, "_SampFreq_",
+        snprintf(sResultsFileName, 300*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
+            "./results/", sFourierType, "_results_", sDesc, "_SampFreq_",
             iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
+
+        // All results will be the same, thus, save only the first replica
         if (iReplica == 0) {
             fptr = fopen(sResultsFileName, "w");
             fprintf(fptr, "Frequency;Real;Imaginary;Amplitude;Angle\n");
-            fclose(fptr);
+            lTimes[5] = timeReader();
+            for (size_t iFreqComp = 0; iFreqComp < iNyquistLimit; iFreqComp++) {
+                float fReal       = cSpectrum[iFreqComp].real;
+                float fImag       = cSpectrum[iFreqComp].imag;
+                float fAmplitude  = sqrt(fReal*fReal + fImag*fImag)/iSamplesQty;
+                float fAngle      = atan2(fImag, fReal);
+                float fFrequency  =
+                    (float)iFreqComp*(iSamplingFrequency/iSamplesQty);
+                fprintf(fptr, "%.1f;%.8f;%.8f;%.8f;%.8f\n",
+                    fFrequency, fReal, fImag, fAmplitude, fAngle);
+            }
+            lTimes[6] = timeReader();
         }
-        fptr = fopen(sResultsFileName, "a");
-        lTimes[5] = timeReader();
-        for (size_t iFreqComp = 0; iFreqComp < iNyquistLimit; iFreqComp++) {
-            float fReal       = cSpectrum[iFreqComp].real;
-            float fImag       = cSpectrum[iFreqComp].imag;
-            float fAmplitude  = sqrt(fReal*fReal + fImag*fImag)/iSamplesQty;
-            float fAngle      = atan2(fImag, fReal);
-            float fFrequency  =
-                (float)iFreqComp*(iSamplingFrequency/iSamplesQty);
-            fprintf(fptr, "%.1f;%.8f;%.8f;%.8f;%.8f\n",
-                fFrequency, fReal, fImag, fAmplitude, fAngle);
-        }
-        lTimes[6] = timeReader();
 
         // ------------------------- //
         // --      SAVE TIMES     -- //
         // ------------------------- //
-        snprintf(sResultsFileName, 300*sizeof(char), "%s%s%s%zu%s%zu%s",
-            "./results/Time_Results_", sDesc, "_SampFreq_",
+        snprintf(sResultsFileName, 300*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
+            "./results/", sFourierType, "_time_results_", sDesc, "_SampFreq_",
             iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
         if (iReplica == 0) {
             fptr = fopen(sResultsFileName, "w");
@@ -173,46 +168,4 @@ int main(int argc, char *argv[]) {
     free(lTimes);
 
     return SUCCESS;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//                      ITERATIVE IMPLEMENTATION OF DFT                       //
-////////////////////////////////////////////////////////////////////////////////
-Complex* discreteFourierTransform(float* fSampledSignal,
-    size_t iSamplesQty, long* lTimes) {
-    // FFT frequency components are stored here
-    Complex* cSpectrum = (Complex*)calloc(iSamplesQty, sizeof(Complex));
-
-    lTimes[7] = timeReader();
-    for (size_t iFreqIndex = 0; iFreqIndex < iSamplesQty; iFreqIndex++) {
-        if (iFreqIndex == 0) {  // Read only the first time entering
-            lTimes[8] = timeReader();
-        }
-        for (size_t iTimeIndex = 0; iTimeIndex < iSamplesQty; iTimeIndex++) {
-            float fAngle = 2.0*M_PI*iFreqIndex*iTimeIndex/iSamplesQty;
-            cSpectrum[iFreqIndex].real +=
-                fSampledSignal[iTimeIndex]*cos(fAngle);
-            cSpectrum[iFreqIndex].imag -=
-                fSampledSignal[iTimeIndex]*sin(fAngle);
-        }
-        if (iFreqIndex == 0) {  // Read only the first time entering
-            lTimes[9] = timeReader();
-        }
-    }
-    lTimes[10] = timeReader();
-    return cSpectrum;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//                                TIME READER                                 //
-////////////////////////////////////////////////////////////////////////////////
-long timeReader() {
-    struct timespec stTimeReading;
-
-    clock_gettime(CLOCK_MONOTONIC, &stTimeReading);  // Get time reading
-
-    // Compute the time in nanoseconds
-    long lSeconds = stTimeReading.tv_sec;
-    long lNanoseconds = stTimeReading.tv_nsec;
-    return (lSeconds*1000000000L + lNanoseconds);
 }

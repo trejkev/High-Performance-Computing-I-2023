@@ -1,11 +1,8 @@
 // Copyright 2023 Kevin Trejos Vargas <kevin.trejosvargas@ucr.ac.cr>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
+#include "fourier_transform_main.h"
 
-int main(int argc, char *argv[]) {
+int signalGenerator(int argc, char *argv[]) {
     FILE *fptr;
     char* sDesc = (char*)malloc(200*sizeof(char));
     if (sDesc == NULL) {
@@ -18,9 +15,9 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     size_t iSamples;
-    if (argc == 3) {
-        sscanf(argv[1], "%s", sDesc);
-        sscanf(argv[2], "%zu", &iSamples);
+    if (argc == 7) {
+        sscanf(argv[4], "%s", sDesc);
+        sscanf(argv[5], "%zu", &iSamples);
     }
 
     snprintf(sSignalPath, 400*sizeof(char), "%s%s%s",
@@ -32,7 +29,6 @@ int main(int argc, char *argv[]) {
         fprintf(fptr, "%zu\n", iSamples);
         float fTimeStep = 1.0/iSamples;
         size_t iPeriodCycle = 0;
-        float fLastPeak = 0;
         for (size_t iCounter = 0; iCounter < iSamples; iCounter++) {
             float t = iCounter*fTimeStep;
             float fSample;
