@@ -1,0 +1,451 @@
+FileName;SamplingFreq;SamplesQty;Replica;TimeTag;Time(ns)
+./test/square_50Hz.txt;16384;16384;0;Time_0;12592129774046
+./test/square_50Hz.txt;16384;16384;0;Time_1;12592129783964
+./test/square_50Hz.txt;16384;16384;0;Time_2;12592131533694
+./test/square_50Hz.txt;16384;16384;0;Time_3;12592131598585
+./test/square_50Hz.txt;16384;16384;0;Time_4;12592135930791
+./test/square_50Hz.txt;16384;16384;0;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;0;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;0;Time_7;12592131680099
+./test/square_50Hz.txt;16384;16384;0;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;0;Delta Time_1->2;001749730
+./test/square_50Hz.txt;16384;16384;0;Delta Time_0->3;001824539
+./test/square_50Hz.txt;16384;16384;0;Delta Time_3->4;004332206
+./test/square_50Hz.txt;16384;16384;0;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;0;Delta Time_7->10;004239376
+./test/square_50Hz.txt;16384;16384;0;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;1;Time_0;12592143685413
+./test/square_50Hz.txt;16384;16384;1;Time_1;12592143689185
+./test/square_50Hz.txt;16384;16384;1;Time_2;12592145506878
+./test/square_50Hz.txt;16384;16384;1;Time_3;12592145508764
+./test/square_50Hz.txt;16384;16384;1;Time_4;12592149727605
+./test/square_50Hz.txt;16384;16384;1;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;1;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;1;Time_7;12592145549067
+./test/square_50Hz.txt;16384;16384;1;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;1;Delta Time_1->2;001817693
+./test/square_50Hz.txt;16384;16384;1;Delta Time_0->3;001823351
+./test/square_50Hz.txt;16384;16384;1;Delta Time_3->4;004218841
+./test/square_50Hz.txt;16384;16384;1;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;1;Delta Time_7->10;004177560
+./test/square_50Hz.txt;16384;16384;1;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;2;Time_0;12592149750934
+./test/square_50Hz.txt;16384;16384;2;Time_1;12592149753239
+./test/square_50Hz.txt;16384;16384;2;Time_2;12592151452329
+./test/square_50Hz.txt;16384;16384;2;Time_3;12592151454145
+./test/square_50Hz.txt;16384;16384;2;Time_4;12592155617175
+./test/square_50Hz.txt;16384;16384;2;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;2;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;2;Time_7;12592151487533
+./test/square_50Hz.txt;16384;16384;2;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;2;Delta Time_1->2;001699090
+./test/square_50Hz.txt;16384;16384;2;Delta Time_0->3;001703211
+./test/square_50Hz.txt;16384;16384;2;Delta Time_3->4;004163030
+./test/square_50Hz.txt;16384;16384;2;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;2;Delta Time_7->10;004128734
+./test/square_50Hz.txt;16384;16384;2;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;3;Time_0;12592155653427
+./test/square_50Hz.txt;16384;16384;3;Time_1;12592155656221
+./test/square_50Hz.txt;16384;16384;3;Time_2;12592157375706
+./test/square_50Hz.txt;16384;16384;3;Time_3;12592157377592
+./test/square_50Hz.txt;16384;16384;3;Time_4;12592161512054
+./test/square_50Hz.txt;16384;16384;3;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;3;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;3;Time_7;12592157411679
+./test/square_50Hz.txt;16384;16384;3;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;3;Delta Time_1->2;001719485
+./test/square_50Hz.txt;16384;16384;3;Delta Time_0->3;001724165
+./test/square_50Hz.txt;16384;16384;3;Delta Time_3->4;004134462
+./test/square_50Hz.txt;16384;16384;3;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;3;Delta Time_7->10;004098908
+./test/square_50Hz.txt;16384;16384;3;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;4;Time_0;12592161552707
+./test/square_50Hz.txt;16384;16384;4;Time_1;12592161555082
+./test/square_50Hz.txt;16384;16384;4;Time_2;12592163255149
+./test/square_50Hz.txt;16384;16384;4;Time_3;12592163257035
+./test/square_50Hz.txt;16384;16384;4;Time_4;12592167363208
+./test/square_50Hz.txt;16384;16384;4;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;4;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;4;Time_7;12592163293706
+./test/square_50Hz.txt;16384;16384;4;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;4;Delta Time_1->2;001700067
+./test/square_50Hz.txt;16384;16384;4;Delta Time_0->3;001704328
+./test/square_50Hz.txt;16384;16384;4;Delta Time_3->4;004106173
+./test/square_50Hz.txt;16384;16384;4;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;4;Delta Time_7->10;004068105
+./test/square_50Hz.txt;16384;16384;4;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;5;Time_0;12592167393313
+./test/square_50Hz.txt;16384;16384;5;Time_1;12592167395688
+./test/square_50Hz.txt;16384;16384;5;Time_2;12592169100574
+./test/square_50Hz.txt;16384;16384;5;Time_3;12592169102460
+./test/square_50Hz.txt;16384;16384;5;Time_4;12592173217574
+./test/square_50Hz.txt;16384;16384;5;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;5;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;5;Time_7;12592169139830
+./test/square_50Hz.txt;16384;16384;5;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;5;Delta Time_1->2;001704886
+./test/square_50Hz.txt;16384;16384;5;Delta Time_0->3;001709147
+./test/square_50Hz.txt;16384;16384;5;Delta Time_3->4;004115114
+./test/square_50Hz.txt;16384;16384;5;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;5;Delta Time_7->10;004076836
+./test/square_50Hz.txt;16384;16384;5;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;6;Time_0;12592173239996
+./test/square_50Hz.txt;16384;16384;6;Time_1;12592173242790
+./test/square_50Hz.txt;16384;16384;6;Time_2;12592174944952
+./test/square_50Hz.txt;16384;16384;6;Time_3;12592174946908
+./test/square_50Hz.txt;16384;16384;6;Time_4;12592179055875
+./test/square_50Hz.txt;16384;16384;6;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;6;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;6;Time_7;12592174981204
+./test/square_50Hz.txt;16384;16384;6;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;6;Delta Time_1->2;001702162
+./test/square_50Hz.txt;16384;16384;6;Delta Time_0->3;001706912
+./test/square_50Hz.txt;16384;16384;6;Delta Time_3->4;004108967
+./test/square_50Hz.txt;16384;16384;6;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;6;Delta Time_7->10;004073693
+./test/square_50Hz.txt;16384;16384;6;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;7;Time_0;12592179073128
+./test/square_50Hz.txt;16384;16384;7;Time_1;12592179075503
+./test/square_50Hz.txt;16384;16384;7;Time_2;12592180793381
+./test/square_50Hz.txt;16384;16384;7;Time_3;12592180795756
+./test/square_50Hz.txt;16384;16384;7;Time_4;12592184949706
+./test/square_50Hz.txt;16384;16384;7;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;7;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;7;Time_7;12592180836129
+./test/square_50Hz.txt;16384;16384;7;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;7;Delta Time_1->2;001717878
+./test/square_50Hz.txt;16384;16384;7;Delta Time_0->3;001722628
+./test/square_50Hz.txt;16384;16384;7;Delta Time_3->4;004153950
+./test/square_50Hz.txt;16384;16384;7;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;7;Delta Time_7->10;004112111
+./test/square_50Hz.txt;16384;16384;7;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;8;Time_0;12592185022559
+./test/square_50Hz.txt;16384;16384;8;Time_1;12592185025912
+./test/square_50Hz.txt;16384;16384;8;Time_2;12592186738902
+./test/square_50Hz.txt;16384;16384;8;Time_3;12592186740787
+./test/square_50Hz.txt;16384;16384;8;Time_4;12592190877485
+./test/square_50Hz.txt;16384;16384;8;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;8;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;8;Time_7;12592186781370
+./test/square_50Hz.txt;16384;16384;8;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;8;Delta Time_1->2;001712990
+./test/square_50Hz.txt;16384;16384;8;Delta Time_0->3;001718228
+./test/square_50Hz.txt;16384;16384;8;Delta Time_3->4;004136698
+./test/square_50Hz.txt;16384;16384;8;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;8;Delta Time_7->10;004094229
+./test/square_50Hz.txt;16384;16384;8;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;9;Time_0;12592190909895
+./test/square_50Hz.txt;16384;16384;9;Time_1;12592190912689
+./test/square_50Hz.txt;16384;16384;9;Time_2;12592192613035
+./test/square_50Hz.txt;16384;16384;9;Time_3;12592192614921
+./test/square_50Hz.txt;16384;16384;9;Time_4;12592196756927
+./test/square_50Hz.txt;16384;16384;9;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;9;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;9;Time_7;12592192655434
+./test/square_50Hz.txt;16384;16384;9;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;9;Delta Time_1->2;001700346
+./test/square_50Hz.txt;16384;16384;9;Delta Time_0->3;001705026
+./test/square_50Hz.txt;16384;16384;9;Delta Time_3->4;004142006
+./test/square_50Hz.txt;16384;16384;9;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;9;Delta Time_7->10;004100026
+./test/square_50Hz.txt;16384;16384;9;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;10;Time_0;12592196813156
+./test/square_50Hz.txt;16384;16384;10;Time_1;12592196816020
+./test/square_50Hz.txt;16384;16384;10;Time_2;12592198548078
+./test/square_50Hz.txt;16384;16384;10;Time_3;12592198550453
+./test/square_50Hz.txt;16384;16384;10;Time_4;12592202699933
+./test/square_50Hz.txt;16384;16384;10;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;10;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;10;Time_7;12592198588381
+./test/square_50Hz.txt;16384;16384;10;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;10;Delta Time_1->2;001732058
+./test/square_50Hz.txt;16384;16384;10;Delta Time_0->3;001737297
+./test/square_50Hz.txt;16384;16384;10;Delta Time_3->4;004149480
+./test/square_50Hz.txt;16384;16384;10;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;10;Delta Time_7->10;004110574
+./test/square_50Hz.txt;16384;16384;10;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;11;Time_0;12592202721865
+./test/square_50Hz.txt;16384;16384;11;Time_1;12592202724240
+./test/square_50Hz.txt;16384;16384;11;Time_2;12592204440652
+./test/square_50Hz.txt;16384;16384;11;Time_3;12592204442608
+./test/square_50Hz.txt;16384;16384;11;Time_4;12592208588386
+./test/square_50Hz.txt;16384;16384;11;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;11;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;11;Time_7;12592204480676
+./test/square_50Hz.txt;16384;16384;11;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;11;Delta Time_1->2;001716412
+./test/square_50Hz.txt;16384;16384;11;Delta Time_0->3;001720743
+./test/square_50Hz.txt;16384;16384;11;Delta Time_3->4;004145778
+./test/square_50Hz.txt;16384;16384;11;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;11;Delta Time_7->10;004106243
+./test/square_50Hz.txt;16384;16384;11;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;12;Time_0;12592208610807
+./test/square_50Hz.txt;16384;16384;12;Time_1;12592208612693
+./test/square_50Hz.txt;16384;16384;12;Time_2;12592210339513
+./test/square_50Hz.txt;16384;16384;12;Time_3;12592210341399
+./test/square_50Hz.txt;16384;16384;12;Time_4;12592214463916
+./test/square_50Hz.txt;16384;16384;12;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;12;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;12;Time_7;12592210376253
+./test/square_50Hz.txt;16384;16384;12;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;12;Delta Time_1->2;001726820
+./test/square_50Hz.txt;16384;16384;12;Delta Time_0->3;001730592
+./test/square_50Hz.txt;16384;16384;12;Delta Time_3->4;004122517
+./test/square_50Hz.txt;16384;16384;12;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;12;Delta Time_7->10;004086266
+./test/square_50Hz.txt;16384;16384;12;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;13;Time_0;12592214519237
+./test/square_50Hz.txt;16384;16384;13;Time_1;12592214522660
+./test/square_50Hz.txt;16384;16384;13;Time_2;12592216241097
+./test/square_50Hz.txt;16384;16384;13;Time_3;12592216243053
+./test/square_50Hz.txt;16384;16384;13;Time_4;12592220419355
+./test/square_50Hz.txt;16384;16384;13;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;13;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;13;Time_7;12592216285801
+./test/square_50Hz.txt;16384;16384;13;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;13;Delta Time_1->2;001718437
+./test/square_50Hz.txt;16384;16384;13;Delta Time_0->3;001723816
+./test/square_50Hz.txt;16384;16384;13;Delta Time_3->4;004176302
+./test/square_50Hz.txt;16384;16384;13;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;13;Delta Time_7->10;004132157
+./test/square_50Hz.txt;16384;16384;13;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;14;Time_0;12592220463221
+./test/square_50Hz.txt;16384;16384;14;Time_1;12592220465595
+./test/square_50Hz.txt;16384;16384;14;Time_2;12592222216443
+./test/square_50Hz.txt;16384;16384;14;Time_3;12592222217910
+./test/square_50Hz.txt;16384;16384;14;Time_4;12592226361802
+./test/square_50Hz.txt;16384;16384;14;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;14;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;14;Time_7;12592222250809
+./test/square_50Hz.txt;16384;16384;14;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;14;Delta Time_1->2;001750848
+./test/square_50Hz.txt;16384;16384;14;Delta Time_0->3;001754689
+./test/square_50Hz.txt;16384;16384;14;Delta Time_3->4;004143892
+./test/square_50Hz.txt;16384;16384;14;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;14;Delta Time_7->10;004110015
+./test/square_50Hz.txt;16384;16384;14;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;15;Time_0;12592226381290
+./test/square_50Hz.txt;16384;16384;15;Time_1;12592226382687
+./test/square_50Hz.txt;16384;16384;15;Time_2;12592228136538
+./test/square_50Hz.txt;16384;16384;15;Time_3;12592228139402
+./test/square_50Hz.txt;16384;16384;15;Time_4;12592232320663
+./test/square_50Hz.txt;16384;16384;15;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;15;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;15;Time_7;12592228179146
+./test/square_50Hz.txt;16384;16384;15;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;15;Delta Time_1->2;001753851
+./test/square_50Hz.txt;16384;16384;15;Delta Time_0->3;001758112
+./test/square_50Hz.txt;16384;16384;15;Delta Time_3->4;004181261
+./test/square_50Hz.txt;16384;16384;15;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;15;Delta Time_7->10;004140120
+./test/square_50Hz.txt;16384;16384;15;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;16;Time_0;12592232373818
+./test/square_50Hz.txt;16384;16384;16;Time_1;12592232377730
+./test/square_50Hz.txt;16384;16384;16;Time_2;12592234154143
+./test/square_50Hz.txt;16384;16384;16;Time_3;12592234156518
+./test/square_50Hz.txt;16384;16384;16;Time_4;12592238327231
+./test/square_50Hz.txt;16384;16384;16;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;16;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;16;Time_7;12592234196681
+./test/square_50Hz.txt;16384;16384;16;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;16;Delta Time_1->2;001776413
+./test/square_50Hz.txt;16384;16384;16;Delta Time_0->3;001782700
+./test/square_50Hz.txt;16384;16384;16;Delta Time_3->4;004170713
+./test/square_50Hz.txt;16384;16384;16;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;16;Delta Time_7->10;004129084
+./test/square_50Hz.txt;16384;16384;16;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;17;Time_0;12592238358664
+./test/square_50Hz.txt;16384;16384;17;Time_1;12592238360620
+./test/square_50Hz.txt;16384;16384;17;Time_2;12592240104343
+./test/square_50Hz.txt;16384;16384;17;Time_3;12592240106229
+./test/square_50Hz.txt;16384;16384;17;Time_4;12592244265836
+./test/square_50Hz.txt;16384;16384;17;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;17;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;17;Time_7;12592240142900
+./test/square_50Hz.txt;16384;16384;17;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;17;Delta Time_1->2;001743723
+./test/square_50Hz.txt;16384;16384;17;Delta Time_0->3;001747565
+./test/square_50Hz.txt;16384;16384;17;Delta Time_3->4;004159607
+./test/square_50Hz.txt;16384;16384;17;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;17;Delta Time_7->10;004121120
+./test/square_50Hz.txt;16384;16384;17;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;18;Time_0;12592244336384
+./test/square_50Hz.txt;16384;16384;18;Time_1;12592244340645
+./test/square_50Hz.txt;16384;16384;18;Time_2;12592246116359
+./test/square_50Hz.txt;16384;16384;18;Time_3;12592246119572
+./test/square_50Hz.txt;16384;16384;18;Time_4;12592250349658
+./test/square_50Hz.txt;16384;16384;18;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;18;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;18;Time_7;12592246158548
+./test/square_50Hz.txt;16384;16384;18;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;18;Delta Time_1->2;001775714
+./test/square_50Hz.txt;16384;16384;18;Delta Time_0->3;001783188
+./test/square_50Hz.txt;16384;16384;18;Delta Time_3->4;004230086
+./test/square_50Hz.txt;16384;16384;18;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;18;Delta Time_7->10;004189713
+./test/square_50Hz.txt;16384;16384;18;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;19;Time_0;12592250388704
+./test/square_50Hz.txt;16384;16384;19;Time_1;12592250391638
+./test/square_50Hz.txt;16384;16384;19;Time_2;12592252151287
+./test/square_50Hz.txt;16384;16384;19;Time_3;12592252152754
+./test/square_50Hz.txt;16384;16384;19;Time_4;12592256300836
+./test/square_50Hz.txt;16384;16384;19;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;19;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;19;Time_7;12592252188307
+./test/square_50Hz.txt;16384;16384;19;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;19;Delta Time_1->2;001759649
+./test/square_50Hz.txt;16384;16384;19;Delta Time_0->3;001764050
+./test/square_50Hz.txt;16384;16384;19;Delta Time_3->4;004148082
+./test/square_50Hz.txt;16384;16384;19;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;19;Delta Time_7->10;004111062
+./test/square_50Hz.txt;16384;16384;19;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;20;Time_0;12592256330383
+./test/square_50Hz.txt;16384;16384;20;Time_1;12592256333177
+./test/square_50Hz.txt;16384;16384;20;Time_2;12592258118530
+./test/square_50Hz.txt;16384;16384;20;Time_3;12592258120416
+./test/square_50Hz.txt;16384;16384;20;Time_4;12592262283935
+./test/square_50Hz.txt;16384;16384;20;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;20;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;20;Time_7;12592258156109
+./test/square_50Hz.txt;16384;16384;20;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;20;Delta Time_1->2;001785353
+./test/square_50Hz.txt;16384;16384;20;Delta Time_0->3;001790033
+./test/square_50Hz.txt;16384;16384;20;Delta Time_3->4;004163519
+./test/square_50Hz.txt;16384;16384;20;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;20;Delta Time_7->10;004126429
+./test/square_50Hz.txt;16384;16384;20;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;21;Time_0;12592262332062
+./test/square_50Hz.txt;16384;16384;21;Time_1;12592262335903
+./test/square_50Hz.txt;16384;16384;21;Time_2;12592264091710
+./test/square_50Hz.txt;16384;16384;21;Time_3;12592264093666
+./test/square_50Hz.txt;16384;16384;21;Time_4;12592268271156
+./test/square_50Hz.txt;16384;16384;21;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;21;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;21;Time_7;12592264133760
+./test/square_50Hz.txt;16384;16384;21;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;21;Delta Time_1->2;001755807
+./test/square_50Hz.txt;16384;16384;21;Delta Time_0->3;001761604
+./test/square_50Hz.txt;16384;16384;21;Delta Time_3->4;004177490
+./test/square_50Hz.txt;16384;16384;21;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;21;Delta Time_7->10;004135999
+./test/square_50Hz.txt;16384;16384;21;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;22;Time_0;12592268299095
+./test/square_50Hz.txt;16384;16384;22;Time_1;12592268302378
+./test/square_50Hz.txt;16384;16384;22;Time_2;12592270073412
+./test/square_50Hz.txt;16384;16384;22;Time_3;12592270074879
+./test/square_50Hz.txt;16384;16384;22;Time_4;12592274248806
+./test/square_50Hz.txt;16384;16384;22;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;22;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;22;Time_7;12592270111690
+./test/square_50Hz.txt;16384;16384;22;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;22;Delta Time_1->2;001771034
+./test/square_50Hz.txt;16384;16384;22;Delta Time_0->3;001775784
+./test/square_50Hz.txt;16384;16384;22;Delta Time_3->4;004173927
+./test/square_50Hz.txt;16384;16384;22;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;22;Delta Time_7->10;004136138
+./test/square_50Hz.txt;16384;16384;22;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;23;Time_0;12592274295955
+./test/square_50Hz.txt;16384;16384;23;Time_1;12592274299377
+./test/square_50Hz.txt;16384;16384;23;Time_2;12592276075930
+./test/square_50Hz.txt;16384;16384;23;Time_3;12592276079282
+./test/square_50Hz.txt;16384;16384;23;Time_4;12592280299031
+./test/square_50Hz.txt;16384;16384;23;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;23;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;23;Time_7;12592276118817
+./test/square_50Hz.txt;16384;16384;23;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;23;Delta Time_1->2;001776553
+./test/square_50Hz.txt;16384;16384;23;Delta Time_0->3;001783327
+./test/square_50Hz.txt;16384;16384;23;Delta Time_3->4;004219749
+./test/square_50Hz.txt;16384;16384;23;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;23;Delta Time_7->10;004178747
+./test/square_50Hz.txt;16384;16384;23;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;24;Time_0;12592280334724
+./test/square_50Hz.txt;16384;16384;24;Time_1;12592280338146
+./test/square_50Hz.txt;16384;16384;24;Time_2;12592282114140
+./test/square_50Hz.txt;16384;16384;24;Time_3;12592282116445
+./test/square_50Hz.txt;16384;16384;24;Time_4;12592286292258
+./test/square_50Hz.txt;16384;16384;24;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;24;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;24;Time_7;12592282151719
+./test/square_50Hz.txt;16384;16384;24;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;24;Delta Time_1->2;001775994
+./test/square_50Hz.txt;16384;16384;24;Delta Time_0->3;001781721
+./test/square_50Hz.txt;16384;16384;24;Delta Time_3->4;004175813
+./test/square_50Hz.txt;16384;16384;24;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;24;Delta Time_7->10;004139561
+./test/square_50Hz.txt;16384;16384;24;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;25;Time_0;12592286320896
+./test/square_50Hz.txt;16384;16384;25;Time_1;12592286323271
+./test/square_50Hz.txt;16384;16384;25;Time_2;12592288052745
+./test/square_50Hz.txt;16384;16384;25;Time_3;12592288054701
+./test/square_50Hz.txt;16384;16384;25;Time_4;12592292195379
+./test/square_50Hz.txt;16384;16384;25;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;25;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;25;Time_7;12592288091721
+./test/square_50Hz.txt;16384;16384;25;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;25;Delta Time_1->2;001729474
+./test/square_50Hz.txt;16384;16384;25;Delta Time_0->3;001733805
+./test/square_50Hz.txt;16384;16384;25;Delta Time_3->4;004140678
+./test/square_50Hz.txt;16384;16384;25;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;25;Delta Time_7->10;004102192
+./test/square_50Hz.txt;16384;16384;25;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;26;Time_0;12592292214309
+./test/square_50Hz.txt;16384;16384;26;Time_1;12592292216683
+./test/square_50Hz.txt;16384;16384;26;Time_2;12592293992887
+./test/square_50Hz.txt;16384;16384;26;Time_3;12592293995261
+./test/square_50Hz.txt;16384;16384;26;Time_4;12592298178758
+./test/square_50Hz.txt;16384;16384;26;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;26;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;26;Time_7;12592294034377
+./test/square_50Hz.txt;16384;16384;26;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;26;Delta Time_1->2;001776204
+./test/square_50Hz.txt;16384;16384;26;Delta Time_0->3;001780952
+./test/square_50Hz.txt;16384;16384;26;Delta Time_3->4;004183497
+./test/square_50Hz.txt;16384;16384;26;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;26;Delta Time_7->10;004142495
+./test/square_50Hz.txt;16384;16384;26;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;27;Time_0;12592298243229
+./test/square_50Hz.txt;16384;16384;27;Time_1;12592298246512
+./test/square_50Hz.txt;16384;16384;27;Time_2;12592300002319
+./test/square_50Hz.txt;16384;16384;27;Time_3;12592300004275
+./test/square_50Hz.txt;16384;16384;27;Time_4;12592304178900
+./test/square_50Hz.txt;16384;16384;27;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;27;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;27;Time_7;12592300042413
+./test/square_50Hz.txt;16384;16384;27;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;27;Delta Time_1->2;001755807
+./test/square_50Hz.txt;16384;16384;27;Delta Time_0->3;001761046
+./test/square_50Hz.txt;16384;16384;27;Delta Time_3->4;004174625
+./test/square_50Hz.txt;16384;16384;27;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;27;Delta Time_7->10;004135090
+./test/square_50Hz.txt;16384;16384;27;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;28;Time_0;12592304199436
+./test/square_50Hz.txt;16384;16384;28;Time_1;12592304202230
+./test/square_50Hz.txt;16384;16384;28;Time_2;12592305982624
+./test/square_50Hz.txt;16384;16384;28;Time_3;12592305984580
+./test/square_50Hz.txt;16384;16384;28;Time_4;12592310128891
+./test/square_50Hz.txt;16384;16384;28;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;28;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;28;Time_7;12592306019924
+./test/square_50Hz.txt;16384;16384;28;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;28;Delta Time_1->2;001780394
+./test/square_50Hz.txt;16384;16384;28;Delta Time_0->3;001785144
+./test/square_50Hz.txt;16384;16384;28;Delta Time_3->4;004144311
+./test/square_50Hz.txt;16384;16384;28;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;28;Delta Time_7->10;004107500
+./test/square_50Hz.txt;16384;16384;28;Delta Time_8->9;000000000
+./test/square_50Hz.txt;16384;16384;29;Time_0;12592310146632
+./test/square_50Hz.txt;16384;16384;29;Time_1;12592310149007
+./test/square_50Hz.txt;16384;16384;29;Time_2;12592311927376
+./test/square_50Hz.txt;16384;16384;29;Time_3;12592311929262
+./test/square_50Hz.txt;16384;16384;29;Time_4;12592316210058
+./test/square_50Hz.txt;16384;16384;29;Time_5;12592136003155
+./test/square_50Hz.txt;16384;16384;29;Time_6;12592143609905
+./test/square_50Hz.txt;16384;16384;29;Time_7;12592311969425
+./test/square_50Hz.txt;16384;16384;29;Time_8;000000000
+./test/square_50Hz.txt;16384;16384;29;Delta Time_1->2;001778369
+./test/square_50Hz.txt;16384;16384;29;Delta Time_0->3;001782630
+./test/square_50Hz.txt;16384;16384;29;Delta Time_3->4;004280796
+./test/square_50Hz.txt;16384;16384;29;Delta Time_5->6;007606750
+./test/square_50Hz.txt;16384;16384;29;Delta Time_7->10;004238747
+./test/square_50Hz.txt;16384;16384;29;Delta Time_8->9;000000000
