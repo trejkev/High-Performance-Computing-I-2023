@@ -1,4 +1,4 @@
-# Concurrent Optimization of Discrete and Fast Fourier Transform
+# Concurrent Optimization of Discrete and Fast Fourier Transforms
 
 This homework consisted of creating a Discrete and Fast Fourier Transform, optimized in time by executing it concurrently using multi-threading and multi-process methodologies.
 
