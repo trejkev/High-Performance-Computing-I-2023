@@ -31,7 +31,7 @@ int signalGenerator(int argc, char *argv[]) {
         size_t iPeriodCycle = 0;
         for (size_t iCounter = 0; iCounter < iSamples; iCounter++) {
             float t = iCounter*fTimeStep;
-            float fSample;
+            float fSample = 0;
             if (strcmp(sDesc, "sin_50Hz") == 0) {
                 fSample = sin(2.0*M_PI*50.0*t);
             } else if (strcmp(sDesc, "sin_50Hz_PLUS_sin_450Hz") == 0) {
