@@ -39,4 +39,4 @@ Into the makefile are some variables of interest to try with different scenarios
 5. SIGNAL_DESC: Defines which signal will be sampled, the list of signals available can be found in src/signal_generator.c.
 6. FOURIERTYPE: Defines if FFT or DFT will be executed, it is case sensitive and shall be sent lowercase.
 
-Note: The code will use both, distributed and shared memory concurrency to reduce as much as possible the execution time.
+Note: The code will use both, distributed and shared memory concurrency, to reduce as much as possible the execution time.
