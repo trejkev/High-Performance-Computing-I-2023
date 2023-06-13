@@ -4,23 +4,23 @@
 
 int main(int argc, char *argv[]) {
     FILE *fptr;
-    char *sFileName, *sDesc, *sFourierType;
+    char *sFileName, *sDesc, *sFourierType, *sResultsFileName;
     float* fSamplesBuffer;
     size_t iThreadsQty, iReplicas;
     size_t iSamplingFrequency, iSamplesQty;
     size_t iNyquistLimit;
     Complex* cSpectrum;
 
-    long* lTimes = (long*)calloc(10, sizeof(long));
+    long* lTimes = (long*)calloc(11, sizeof(long));
 
     // -------------------- //
     // -- GET PARAMETERS -- //
     // -------------------- //
-    if (argc == 7) {
+    if (argc >= 7) {
         signalGenerator(argc, argv);
         sFileName    = (char*)calloc(300, sizeof(char));
         sDesc        = (char*)calloc(300, sizeof(char));
-        sFourierType = (char*)calloc(3, sizeof(char));
+        sFourierType = (char*)calloc(4, sizeof(char));
         sscanf(argv[1], "%s", sDesc);
         snprintf(sFileName, 300*sizeof(char), "%s%s%s",
             "./test/", sDesc, ".txt");
@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
                     iInputFileLength += iSamplesQty;
                     iNyquistLimit = iSamplesQty/2;
                     fSamplesBuffer =
-                        (float*)calloc(iSamplesQty, sizeof(float));
+                        (float*)calloc(iSamplesQty + 2, sizeof(float));
                 } else {
                     float auxSaver;
                     fscanf(fptr, "%f", &auxSaver);
@@ -88,8 +88,8 @@ int main(int argc, char *argv[]) {
         // ------------------------- //
         // -- EXHIBIT THE RESULTS -- //
         // ------------------------- //
-        char *sResultsFileName = (char*)calloc(300, sizeof(char));
-        snprintf(sResultsFileName, 300*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
+        sResultsFileName = (char*)calloc(400, sizeof(char));
+        snprintf(sResultsFileName, 400*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
             "./results/", sFourierType, "_results_", sDesc, "_SampFreq_",
             iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
 
@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
         // ------------------------- //
         // --      SAVE TIMES     -- //
         // ------------------------- //
-        snprintf(sResultsFileName, 300*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
+        snprintf(sResultsFileName, 400*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
             "./results/", sFourierType, "_time_results_", sDesc, "_SampFreq_",
             iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
         if (iReplica == 0) {
@@ -162,10 +162,14 @@ int main(int argc, char *argv[]) {
     // --------------------------- //
     // -- DEALLOCATE THE MEMORY -- //
     // --------------------------- //
-    free(cSpectrum);
-    free(fSamplesBuffer);
-    free(sFileName);
     free(lTimes);
+    free(sFileName);
+    free(sDesc);
+    free(sFourierType);
+    free(fSamplesBuffer);
+    free(cSpectrum);
+    free(sResultsFileName);
+
 
     return SUCCESS;
 }
