@@ -27,9 +27,9 @@ This FFT is a high-valued approach, since high-density signals, $log(n)$ is quit
 ## Running the code
 
 Running the code is quite simple, you can use the Makefile provided to reproduce any of the standard scenarios:
-1. To run the code simply execute make, and then make run.
-2. To run the code with Valgrind memory check, simply run make memcheck.
-3. To run the code with Address Sanitizer (aka asan) simply run make asan, and then make run.
+1. To run the code simply execute _make_, and then _make run_.
+2. To run the code with Valgrind memory check, simply run _make memcheck_.
+3. To run the code with Address Sanitizer (aka asan) simply run _make asan_, and then _make run_.
 
 Into the makefile are some variables of interest to try with different scenarios, these are enumerated below:
 1. PROCESSES: Unused for now, will bring to the game MPI library to concurrently execute the code with distributed memory.
