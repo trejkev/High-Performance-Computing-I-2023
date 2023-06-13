@@ -4,12 +4,15 @@
 
 int main(int argc, char *argv[]) {
     FILE *fptr;
-    char *sFileName, *sDesc, *sFourierType, *sResultsFileName;
-    float* fSamplesBuffer;
+    char *sFileName;
+    char *sDesc;
+    char *sFourierType;
+    char *sResultsFileName;
+    float *fSamplesBuffer;
     size_t iThreadsQty, iReplicas;
     size_t iSamplingFrequency, iSamplesQty;
     size_t iNyquistLimit;
-    Complex* cSpectrum;
+    Complex *cSpectrum;
 
     long* lTimes = (long*)calloc(11, sizeof(long));
 
@@ -109,6 +112,7 @@ int main(int argc, char *argv[]) {
                     fFrequency, fReal, fImag, fAmplitude, fAngle);
             }
             lTimes[6] = timeReader();
+            fclose(fptr);
         }
 
         // ------------------------- //
@@ -123,7 +127,7 @@ int main(int argc, char *argv[]) {
                 "FileName;SamplingFreq;SamplesQty;Replica;TimeTag;Time(ns)\n");
             fclose(fptr);
         }
-            fptr = fopen(sResultsFileName, "a");
+        fptr = fopen(sResultsFileName, "a");
         char sTimeTag[100];
         for (size_t iTCount = 0; iTCount < 9; iTCount++) {
             snprintf(sTimeTag, 100*sizeof(char), "Time_%zu", iTCount);

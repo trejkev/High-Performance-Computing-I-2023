@@ -71,6 +71,7 @@ int signalGenerator(int argc, char *argv[]) {
             }
             fprintf(fptr, "%f\n", fSample);
         }
+        fclose(fptr);
     } else {
         printf("    Failed to open %s\n", sSignalPath);
     }
