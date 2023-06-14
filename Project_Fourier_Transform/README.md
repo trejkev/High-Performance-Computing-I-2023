@@ -24,7 +24,7 @@ Here is where FFT comes into play, which brings a clever solution to DFT, it wor
 
 This FFT is a high-valued approach, since high-density signals, $log(n)$ is quite short in comparison with $n$, reducing the computational time drastically.
 
-## Running the code
+## Running the Code
 
 Running the code is quite simple, you can use the Makefile provided to reproduce any of the standard scenarios:
 1. To run the code simply execute _make_, and then _make run_.
@@ -40,3 +40,25 @@ Into the makefile are some variables of interest to try with different scenarios
 6. FOURIERTYPE: Defines if FFT or DFT will be executed, it is case sensitive and shall be sent lowercase.
 
 Note: The code will use both, distributed and shared memory concurrency, to reduce as much as possible the execution time.
+
+## Sequential Time Results
+
+There were executed some tests to be able to compare the time DFT takes, compared to FFT, both in sequential execution.
+
+### Discrete Fourier Transform Sequential Time Results
+
+Since DFT takes more computational time, the trials were executed up to  65536, which is, for this code, the minimum frequency to accomplish Nyquist theorem. As shown in the figure below, the elapsed time starts growing exponentially, ending with an elapsed time of about 140 seconds for 65536 samples per second, analyzed through a single second.
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/5eef58f6-dfee-4530-ad93-14aef8b0b95d" />
+</p>
+
+### Fast Fourier Transform Sequential Time Results
+
+Since FFT takes less computational time, the trials were executed up to  524288, which is, 8 times the maximum frequency used with DFT. As shown in the figure below, the elapsed time starts growing exponentially, however, because of the enhanced procedure, it ends up with an elapsed time of about 0.18 seconds, which is about 778 times faster than the DFT, making it evident that FFT is more convenient than DFT from time complexity point of view.
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/69789601-23b1-4daa-a1b8-b6aedb0471b1" />
+</p>
+
+
