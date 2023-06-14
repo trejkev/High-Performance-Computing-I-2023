@@ -55,7 +55,7 @@ Since DFT takes more computational time, the trials were executed up to  65536, 
 
 ### Fast Fourier Transform Sequential Time Results
 
-Since FFT takes less computational time, the trials were executed up to  524288, which is, 8 times the maximum frequency used with DFT. As shown in the figure below, the elapsed time starts growing exponentially, however, because of the enhanced procedure, it ends up with an elapsed time of about 0.18 seconds, which is about 778 times faster than the DFT, making it evident that FFT is more convenient than DFT from time complexity point of view.
+Since FFT takes less computational time, the trials were executed up to  524288, which is, 8 times the maximum frequency used with DFT. As shown in the figure below, the elapsed time starts growing linearly, however, because of the enhanced procedure, it ends up with an elapsed time of about 0.18 seconds, which is about 778 times faster than the DFT, making it evident that FFT is more convenient than DFT from time complexity point of view.
 
 <p align="center">
   <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/69789601-23b1-4daa-a1b8-b6aedb0471b1" />
