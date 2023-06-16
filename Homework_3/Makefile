@@ -1,10 +1,11 @@
-FILENAME      = MatricesVectorialMultiplier
+FILENAME      = MatVectMult
 GNU_COMPILER  = gcc
 SOURCES       = ./src/*.c
-REPEAT        = 10
-AROWS         = 5
-BCOLS         = 3
-ACOLS_BROWS   = 7
+THREADS       = 8
+REPEAT        = 2
+AROWS         = 1500
+BCOLS         = 1300
+ACOLS_BROWS   = 1800
 
 
 LINTFILTERS = $\
@@ -14,16 +15,16 @@ LINTFILTERS = $\
 	-readability/casting,$\
 	-runtime/references
 
-$(FILENAME): clean MatricesVectorialMultiplier_parallel MatricesVectorialMultiplier_sequential
+$(FILENAME): clean $(FILENAME)_concurrent $(FILENAME)_sequential
 
-$(FILENAME)_parallel:
-	$(GNU_COMPILER) -fopenmp $(SOURCES) -o ./bin/$(FILENAME)_parallel
+$(FILENAME)_concurrent: ./src/timeReader.h
+	$(GNU_COMPILER) -fopenmp ./src/$(FILENAME)Concurrent.c ./src/timeReader.c -o ./bin/$(FILENAME)_concurrent
 
-$(FILENAME)_sequential:
-	$(GNU_COMPILER) $(SOURCES) -o ./bin/$(FILENAME)_sequential
+$(FILENAME)_sequential: ./src/timeReader.h
+	$(GNU_COMPILER) ./src/$(FILENAME)Sequential.c ./src/timeReader.c -o ./bin/$(FILENAME)_sequential
 
-run_parallel:
-	./bin/$(FILENAME)_parallel $(REPEAT) $(AROWS) $(BCOLS) $(ACOLS_BROWS)
+run_concurrent:
+	./bin/$(FILENAME)_concurrent $(REPEAT) $(AROWS) $(BCOLS) $(ACOLS_BROWS) $(THREADS)
 
 run_sequential:
 	./bin/$(FILENAME)_sequential $(REPEAT) $(AROWS) $(BCOLS) $(ACOLS_BROWS)
