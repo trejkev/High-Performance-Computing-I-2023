@@ -31,9 +31,7 @@ Makefile notes:
 There were 300 trials executed using  64 processes, and in the case of only vectorization, a total of 640,000 trapezoids, which is equivalent in computational effort. The data can be found in the results directory, the raw data for the elapsed time was plotted together with an individual value plot, and the resulting graph is shown below.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/07dd9ce1-e967-470f-a211-3b13c314fa8d" />
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/9e55a81a-7ea8-42ea-a8fb-d6342f6239f2" />
 </p>
 
-As you can tell, vectorized version of MPI trends to late for a shorter time, compared to its non-vectorized version, but only vectorization compared to MPI and MPI vectorized trends to late for a longer time than both that were using MPI, and this can be pointed to two main reasons:
-  - The compiler, they both are using different compilers, and this may be giving different asm code to be run, perhaps MPI code is more optimized.
-  - The CPUs usage, even when MPI is made to be run in a cluster, in this case, the tests were executed in a single computer, thus there is no latency reduction because of the network communications, resulting simply in a 64-thread concurrent (and even vectorized) execution of 10,000 cycles, in the best scenario, versus a sequential execution of 640,000 cycles.
+As you can tell, vectorized version of MPI trends to late for a shorter time, compared to its non-vectorized version, but only vectorization compared to MPI and MPI vectorized trends to late for a shorter time than both that were using MPI, and this can be assumed to be because Vectorization does not require any communication between processes, and simply executes concurrently the high-load iterative part of the code.
