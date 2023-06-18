@@ -2,7 +2,9 @@
 
 #include <stdio.h>
 #include <math.h>  // Use floating abs
-#include <time.h>  // To deal with delta time measurements
+#include "timeReader.h"
+
+#define PI 3.141592653589793238462643383279502884197
 
 int main(int argc, char** argv) {
     int iColumnsQty = 1000;
@@ -19,8 +21,8 @@ int main(int argc, char** argv) {
 
     for (short iTrial = 0; iTrial < iRepeatNTimes; iTrial++) {
         // Gets initial time reading
-        float start_time = clock();
-        float fDeltaX = 1/((float)iColumnsQty);
+        long start_time = timeReader();
+        float fDeltaX = 1.0/iColumnsQty;
         float fArea = 0;  // Will store the area computed by the current rank
         float fLowerBound = 0;
         float fXToEvaluate;  // Will store x value to be evaluated
@@ -32,7 +34,7 @@ int main(int argc, char** argv) {
             for (int iOffset = 0; iOffset <= 1; iOffset++) {
                 float fNextTrapezoid = iTrapezoidNum + iOffset;
                 fXToEvaluate = fLowerBound + fNextTrapezoid*fDeltaX;
-                fAreas[iTrapezoidNum] += 4/(1 + fXToEvaluate*fXToEvaluate);
+                fAreas[iTrapezoidNum] += 4.0/(1 + fXToEvaluate*fXToEvaluate);
             }
         }
         for (int iCounter = 0; iCounter < iColumnsQty; iCounter++) {
@@ -42,16 +44,14 @@ int main(int argc, char** argv) {
         // Trapezoid approximation performs calculations to all evals
         fArea *= fDeltaX;
         fArea /= 2;
-        // printf("Pi approximation using %d columns is %.32f\n", iColumnsQty, fArea);
-        float fError = fabs(fArea - 3.141592653589793238462643383279502884197);
-        // printf("Error is: %.32f\n", fError);
+        float fError = fabs(fArea - PI);
 
         // Gets final time reading
-        float finish_time = clock();
+        long finish_time = timeReader();
         // Computing elapsed time
-        float fElapsedTime = (float)(finish_time - start_time)/CLOCKS_PER_SEC;
-        // printf("Elapsed time: %.9lf s\n", fElapsedTime);
+        long fElapsedTimeNanoSec = finish_time - start_time;
+        float fElapsedTimeSec    = (float)fElapsedTimeNanoSec/1000000000L;
         printf("Columns;%d;PiApprox;%.32f;Error;%.32f;ElapsedTime;%.9lf\n",
-            iColumnsQty, fArea, fError, fElapsedTime);
+            iColumnsQty, fArea, fError, fElapsedTimeSec);
     }
 }
