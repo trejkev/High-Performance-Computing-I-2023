@@ -27,14 +27,14 @@ VECTORIZATIONFLAGS = $\
 
 $(FILENAME): $(FILENAME)_MPI $(FILENAME)_MPI_VECTORIZED $(FILENAME)_VECTORIZED
 
-$(FILENAME)_MPI:
-	$(MPI_COMPILER) ./src/$(FILENAME).c -o ./bin/$(FILENAME)_MPI
+$(FILENAME)_MPI: ./src/timeReader.h
+	$(MPI_COMPILER) ./src/$(FILENAME).c ./src/timeReader.c -o ./bin/$(FILENAME)_MPI
 
-$(FILENAME)_MPI_VECTORIZED:
-	$(MPI_COMPILER) ./src/$(FILENAME).c $(VECTORIZATIONFLAGS) -o ./bin/$(FILENAME)_MPI_VECTORIZED
+$(FILENAME)_MPI_VECTORIZED: ./src/timeReader.h
+	$(MPI_COMPILER) ./src/$(FILENAME).c ./src/timeReader.c $(VECTORIZATIONFLAGS) -o ./bin/$(FILENAME)_MPI_VECTORIZED
 
-$(FILENAME)_VECTORIZED:
-	$(GNU_COMPILER) ./src/$(FILENAME)VectorizationCompliant.c $(VECTORIZATIONFLAGS) -o ./bin/$(FILENAME)_VECTORIZED
+$(FILENAME)_VECTORIZED: ./src/timeReader.h
+	$(GNU_COMPILER) ./src/$(FILENAME)VectorizationCompliant.c ./src/timeReader.c $(VECTORIZATIONFLAGS) -o ./bin/$(FILENAME)_VECTORIZED
 
 run_MPI:
 	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)_MPI $(REPEAT)
