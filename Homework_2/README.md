@@ -31,7 +31,7 @@ Makefile notes:
 There were 300 trials executed using  64 processes, and in the case of only vectorization, a total of 640,000 trapezoids, which is equivalent in computational effort. The data can be found in the results directory, the raw data for the elapsed time was plotted together with an individual value plot, and the resulting graph is shown below.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/07dd9ce1-e967-470f-a211-3b13c314fa8d" />
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/9e55a81a-7ea8-42ea-a8fb-d6342f6239f2" />
 </p>
 
 As you can tell, vectorized version of MPI trends to late for a shorter time, compared to its non-vectorized version, but only vectorization compared to MPI and MPI vectorized trends to late for a longer time than both that were using MPI, and this can be pointed to two main reasons:
