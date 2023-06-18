@@ -123,8 +123,8 @@ int main(int argc, char** argv) {
         }
 
         long finish_time = timeReader();
-        double fElapsedTimeNanoSec = (finish_time - start_time);
-        float fElapsedTimeSec = fElapsedTimeNanoSec/1000000000L;
+        long fElapsedTimeNanoSec = finish_time - start_time;
+        float fElapsedTimeSec = (float)fElapsedTimeNanoSec/1000000000L;
 
         // Print the result matrix
         printf("%zu - Elapsed time: %.9lf s\n", replica, fElapsedTimeSec);
