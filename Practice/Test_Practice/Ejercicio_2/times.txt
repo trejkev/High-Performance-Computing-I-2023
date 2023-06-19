@@ -1,0 +1,26 @@
+# Times from sequential execution using personal PC
+ Order 1000 multiplication in 5.964705 seconds 
+ Order 1000 multiplication at 335.305773 mflops
+--
+ Order 1000 multiplication in 6.030825 seconds 
+ Order 1000 multiplication at 331.629609 mflops
+--
+ Order 1000 multiplication in 5.976707 seconds 
+ Order 1000 multiplication at 334.632415 mflops
+--
+ Order 1000 multiplication in 5.978675 seconds 
+ Order 1000 multiplication at 334.522300 mflops
+
+# Times from concurrent execution using personal PC
+-- 1 thread
+ Order 1000 multiplication in 5.995603 seconds 
+ Order 1000 multiplication at 333.577768 mflops
+-- 2 threads
+ Order 1000 multiplication in 3.081050 seconds 
+ Order 1000 multiplication at 649.129447 mflops
+-- 4 threads
+ Order 1000 multiplication in 1.594702 seconds 
+ Order 1000 multiplication at 1254.152861 mflops
+-- 8 threads
+ Order 1000 multiplication in 0.852875 seconds 
+ Order 1000 multiplication at 2345.010011 mflops
