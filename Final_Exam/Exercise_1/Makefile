@@ -1,0 +1,16 @@
+SOURCEFILE  = exercise1
+COMPILER    = mpicc
+EXECUTOR    = mpirun
+PROCESSES   = 8
+RANKTOPRINT = 2
+ROWS        = 64
+COLS        = 8
+
+$(SOURCEFILE): $(SOURCEFILE)_COMPILE
+	$(EXECUTOR) -n $(PROCESSES) ./bin/$(SOURCEFILE) $(RANKTOPRINT) $(ROWS) $(COLS)
+
+$(SOURCEFILE)_COMPILE: clean
+	$(COMPILER) ./src/$(SOURCEFILE).c -o ./bin/$(SOURCEFILE)
+
+clean:
+	-rm -f ./bin/$(SOURCEFILE)
