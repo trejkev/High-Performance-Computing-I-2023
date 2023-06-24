@@ -117,7 +117,7 @@ int main (int argc, char *argv[]) {
       double x = drandom(); 
       double y = drandom();
 
-      if (x*x + y*y <= 1) NcircTotal++;
+      if (x*x + y*y <= r*r) NcircTotal++;
    }
 
    finish_time = timeReader();
