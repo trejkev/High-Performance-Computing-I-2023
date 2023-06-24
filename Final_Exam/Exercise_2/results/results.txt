@@ -1,0 +1,16 @@
+num_trials = 1000000000
+
+Sequential results
+        trial 1: 18.338695526 s
+        trial 2: 18.241144180 s
+        trial 3: 18.367622375 s
+        trial 4: 18.593259811 s
+
+Concurrent results
+        trial 1 - 1  thread : 18.074066162 s
+        trial 1 - 2  threads: 09.192177773 s
+        trial 2 - 4  threads: 05.025875568 s
+        trial 3 - 8  threads: 03.329330444 s
+        trial 4 - 16 threads: 03.321150303 s
+        trial 4 - 32 threads: 03.206853628 s
+        trial 4 - 64 threads: 03.185981512 s
