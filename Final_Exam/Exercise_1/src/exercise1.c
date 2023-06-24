@@ -60,20 +60,40 @@ int main(int argc, char *argv[]) {
             dSelfData[iRow + 1][iCol] = dGlobalData[iOffset + iRow][iCol];
         }
     }
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    if (iMyRank == iRankToPrint) {
-        printf("DEBUG: Rank %d data BEFORE getting the results\n", iMyRank);
-        for (int iRow = 0; iRow < ROWS/iRanksQty + 2; iRow++) {
-            for (int iCol = 0; iCol < COLS; iCol++) {
-                printf("%.0f ", dSelfData[iRow][iCol]);
-            }
-            printf("\n");
-        }
+    // Filling ghost slots with -1
+    for (int iCol = 0; iCol < COLS; iCol++) {
+        dSelfData[0][iCol] = -1;
+    }
+    for (int iCol = 0; iCol < COLS; iCol++) {
+        dSelfData[ROWS/iRanksQty + 1][iCol] = -1;
     }
     MPI_Barrier(MPI_COMM_WORLD);
 
-    /* -> Even transmission to odd
+    // DEBUG: Print self data structure before the processing
+    if (iMyRank == iRankToPrint) {
+        printf("DEBUG: Rank %d data BEFORE getting the results\n", iMyRank);
+        // Printing lower ghost slots
+        for (int iCol = 0; iCol < COLS; iCol++) {
+            printf("%.0f ", dSelfData[0][iCol]);
+        }
+        printf("-> Lower ghost line\n");
+        // Printing self data section
+        for (int iRow = 1; iRow < ROWS/iRanksQty + 1; iRow++) {
+            for (int iCol = 0; iCol < COLS; iCol++) {
+                printf(" %.0f ", dSelfData[iRow][iCol]);
+            }
+            printf("\n");
+        }
+        // Printing upper ghost slots
+        for (int iCol = 0; iCol < COLS; iCol++) {
+            printf("%.0f ", dSelfData[ROWS/iRanksQty + 1][iCol]);
+        }
+        printf("-> Upper ghost line\n");
+    }
+    MPI_Barrier(MPI_COMM_WORLD);
+
+    /* Ghost slots transmission process:
+     * -> Even transmission to odd
      *      -> self upper bound to self + 1 rank lower bound
      *      -> self lower bound to self - 1 rank upper bound
      * -> Odd transmission to even
@@ -114,7 +134,7 @@ int main(int argc, char *argv[]) {
         }
     } 
     MPI_Barrier(MPI_COMM_WORLD);
-    if (iMyRank%2 != 0) { // Odd ranks sending data
+    if (iMyRank%2 != 0) {
         if (iMyRank < iRanksQty - 1) {
             for (int iIndex = 0; iIndex < COLS; ++iIndex) {
                 dSendData[iIndex] = dSelfData[ROWS/iRanksQty][iIndex];
@@ -147,6 +167,7 @@ int main(int argc, char *argv[]) {
     }
     MPI_Barrier(MPI_COMM_WORLD);
 
+    // DEBUG: Print self data structure after the processing
     if (iMyRank == iRankToPrint) {
         printf("DEBUG: Rank %d data AFTER getting the results\n", iMyRank);
         for (int iRow = 0; iRow < ROWS/iRanksQty + 2; ++iRow) {
