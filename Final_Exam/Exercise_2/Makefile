@@ -1,9 +1,10 @@
 SOURCEFILE  = pi_mc
 COMPILER    = gcc
-THREADS     = 1
+THREADS     = 8
+TRIALS      = 1000000000
 
 $(SOURCEFILE): $(SOURCEFILE)_compile
-	./bin/$(SOURCEFILE) $(THREADS)
+	./bin/$(SOURCEFILE) $(THREADS) $(TRIALS)
 
 $(SOURCEFILE)_compile: clean ./src/timeReader.h ./src/random.h
 	$(COMPILER) -fopenmp ./src/*.c -o ./bin/$(SOURCEFILE)

@@ -81,19 +81,15 @@ History:
    Written by Tim Mattson, 9/2007.
 
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
 #include "random.h"
 #include "timeReader.h"
 
-// 
-// The monte carlo pi program
-//
-
-static long num_trials = 1000000000;
-
 int main (int argc, char *argv[]) {
+   static long num_trials = 1;
    double pi;
    double r = 1.0;   // radius of circle. Side of squrare is 2*r 
    double rsquared = r*r;
@@ -101,10 +97,16 @@ int main (int argc, char *argv[]) {
    int iThreadsQty = 0;
 
    if (argc > 1) {
+      // Getting threads quantity
       sscanf(argv[1], "%d", &iThreadsQty);
-      omp_set_num_threads(iThreadsQty);
       printf("Running with %d threads\n", iThreadsQty);
+
+      // Getting number of trials
+      sscanf(argv[2], "%ld", &num_trials);
+      printf("Running %ld trials\n", num_trials);
    }
+
+   omp_set_num_threads(iThreadsQty);
 
    seed(-r, r);  // The circle and square are centered at the origin
 
