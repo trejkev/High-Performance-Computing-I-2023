@@ -28,8 +28,6 @@
 //      Written by Tim Mattson, 9/2007.
 //      changed to drandom() to avoid collision with standard libraries, 11/2011
 
-#include "random.h"
-
 static long MULTIPLIER  = 1366;
 static long ADDEND      = 150889;
 static long PMOD        = 714025;
