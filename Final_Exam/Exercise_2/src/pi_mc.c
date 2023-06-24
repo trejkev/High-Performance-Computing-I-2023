@@ -98,9 +98,8 @@ int main (int argc, char *argv[]) {
    double r = 1.0;   // radius of circle. Side of squrare is 2*r 
    double rsquared = r*r;
    long start_time, finish_time;
-   // double x, y;
-   // long i;
    int iThreadsQty = 0;
+
    if (argc > 1) {
       sscanf(argv[1], "%d", &iThreadsQty);
       omp_set_num_threads(iThreadsQty);
@@ -125,7 +124,6 @@ int main (int argc, char *argv[]) {
    long fElapsedTimeNanoSec = finish_time - start_time;
    float fElapsedTimeSec = (float)fElapsedTimeNanoSec/1000000000L;
 
-   // Print the result matrix
    printf("Elapsed time: %.9lf s\n", fElapsedTimeSec);
 
    pi = 4.0 * ((double)NcircTotal/(double)num_trials);
