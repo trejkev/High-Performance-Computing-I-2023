@@ -1,0 +1,5 @@
+N is 1048576
+Will run GPU concurrency with 10000 blocks and 100 threads per block
+Just about to execute GPU
+Out of GPU region
+Max error: 0
