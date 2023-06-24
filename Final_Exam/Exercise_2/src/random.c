@@ -36,13 +36,18 @@ static long PMOD        = 714025;
 double random_low, random_hi;
 
 double drandom() {
-    // compute an integer random number from zero to mod
+    long random_next;
+    double ret_val;
     long random_last;
-    long random_next = (MULTIPLIER  * random_last + ADDEND)% PMOD;
+
+    // compute an integer random number from zero to mod
+    random_next = (MULTIPLIER  * random_last + ADDEND)% PMOD;
     random_last = random_next;
 
     // shift into preset range
-    return ((double)random_next/(double)PMOD)*(random_hi-random_low)+random_low;
+    ret_val =
+        ((double)random_next/(double)PMOD)*(random_hi-random_low)+random_low;
+    return ret_val;
 }
 
 // set the seed and the range
