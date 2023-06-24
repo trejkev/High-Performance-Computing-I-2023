@@ -8,9 +8,9 @@ Sequential results
 
 Concurrent results
         trial 1 - 1  thread : 18.074066162 s
-        trial 1 - 2  threads: 09.192177773 s
-        trial 2 - 4  threads: 05.025875568 s
-        trial 3 - 8  threads: 03.329330444 s
-        trial 4 - 16 threads: 03.321150303 s
-        trial 4 - 32 threads: 03.206853628 s
-        trial 4 - 64 threads: 03.185981512 s
+        trial 2 - 2  threads: 09.192177773 s
+        trial 3 - 4  threads: 05.025875568 s
+        trial 4 - 8  threads: 03.329330444 s
+        trial 5 - 16 threads: 03.321150303 s
+        trial 6 - 32 threads: 03.206853628 s
+        trial 7 - 64 threads: 03.185981512 s
