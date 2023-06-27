@@ -3,35 +3,42 @@
 #include "fourier_transform_main.h"
 
 int main(int argc, char *argv[]) {
-    FILE *fptr;
-    char *sFileName;
-    char *sDesc;
-    char *sFourierType;
-    char *sResultsFileName;
-    float *fSamplesBuffer;
-    size_t iThreadsQty, iReplicas;
-    size_t iSamplingFrequency, iSamplesQty;
-    size_t iNyquistLimit;
-    Complex *cSpectrum;
+    FILE    *fptr;               // File input and output container
+    char    *sSignPath;          // Keeps the signal path
+    char    *sSignName;          // Keeps the signal name to be generated
+    char    *sFourierType;       // Records if will compute dft or fft
+    char    *sResultsFileName;   // Keeps the results file name
+    float   *fSamplesBuffer;     // Keeps the samples to be transformed
+    size_t   iThreadsQty;        // Keeps the threads quantity to utilize
+    size_t   iReplicas;          // Tells the number of times to execute the ft
+    size_t   iSamplingFrequency; // Tells samples per second of the signal
+    size_t   iSamplesQty;        // Tells the number of samples in the file
+    size_t   iNyquistLimit;      // Saves the Nyquist limit
+    Complex *cSpectrum;          // Keeps the results of the ft
+    long    *lTimes;             // Keeps the time readings from each stage
 
-    long* lTimes = (long*)calloc(11, sizeof(long));
+    lTimes = (long*)calloc(11, sizeof(long));
 
     // -------------------- //
     // -- GET PARAMETERS -- //
     // -------------------- //
     if (argc >= 7) {
         signalGenerator(argc, argv);
-        sFileName    = (char*)calloc(300, sizeof(char));
-        sDesc        = (char*)calloc(300, sizeof(char));
+        sSignPath    = (char*)calloc(300, sizeof(char));
+        sSignName    = (char*)calloc(300, sizeof(char));
         sFourierType = (char*)calloc(4, sizeof(char));
-        sscanf(argv[1], "%s", sDesc);
-        snprintf(sFileName, 300*sizeof(char), "%s%s%s",
-            "./test/", sDesc, ".txt");
+
         sscanf(argv[2], "%zu", &iThreadsQty);
         sscanf(argv[3], "%zu", &iReplicas);
-        sscanf(argv[6], "%s", sFourierType);
+        sscanf(argv[6], "%s" , sFourierType);
+        sscanf(argv[1], "%s" , sSignName);
+
+        snprintf(sSignPath, 300*sizeof(char), "%s%s%s",
+            "./test/", sSignName, ".txt");
+        omp_set_num_threads(iThreadsQty);
+
         printf("    Input parameters:\n");
-        printf("        Input file: %s\n", sFileName);
+        printf("        Input file: %s\n", sSignPath);
         printf("        Threads quantity: %zu\n", iThreadsQty);
         printf("        Replicas: %zu\n", iReplicas);
     } else {
@@ -46,8 +53,8 @@ int main(int argc, char *argv[]) {
         // -- READ INPUT FILE -- //
         // --------------------- //
         lTimes[0] = timeReader();
-        if ((fptr = fopen(sFileName, "r")) == NULL) {
-            printf("Error opening file %s\n", sFileName);
+        if ((fptr = fopen(sSignPath, "r")) == NULL) {
+            printf("Error opening file %s\n", sSignPath);
             return FAIL;
         } else {
             size_t iInputFileLength = 3;
@@ -72,7 +79,7 @@ int main(int argc, char *argv[]) {
         fclose(fptr);
 
         // --------------------- //
-        // -- COMPUTE THE DFT -- //
+        // -- COMPUTE THE FT  -- //
         // --------------------- //
         lTimes[3] = timeReader();
         if (strcmp(sFourierType, "dft") == 0) {
@@ -93,7 +100,7 @@ int main(int argc, char *argv[]) {
         // ------------------------- //
         sResultsFileName = (char*)calloc(400, sizeof(char));
         snprintf(sResultsFileName, 400*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
-            "./results/", sFourierType, "_results_", sDesc, "_SampFreq_",
+            "./results/", sFourierType, "_results_", sSignName, "_SampFreq_",
             iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
 
         // All results will be the same, thus, save only the first replica
@@ -119,8 +126,8 @@ int main(int argc, char *argv[]) {
         // --      SAVE TIMES     -- //
         // ------------------------- //
         snprintf(sResultsFileName, 400*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
-            "./results/", sFourierType, "_time_results_", sDesc, "_SampFreq_",
-            iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
+            "./results/", sFourierType, "_time_results_", sSignName,
+            "_SampFreq_", iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
         if (iReplica == 0) {
             fptr = fopen(sResultsFileName, "w");
             fprintf(fptr,
@@ -131,33 +138,33 @@ int main(int argc, char *argv[]) {
         char sTimeTag[100];
         for (size_t iTCount = 0; iTCount < 9; iTCount++) {
             snprintf(sTimeTag, 100*sizeof(char), "Time_%zu", iTCount);
-            fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+            fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
                 iSamplingFrequency, iSamplesQty, iReplica, sTimeTag,
                 lTimes[iTCount]);
         }
         /* Relevant delta times */
         // Reading input samples
-        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
             iSamplingFrequency, iSamplesQty, iReplica, "Delta Time_1->2",
             lTimes[2] - lTimes[1]);
         // Reading input file
-        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
             iSamplingFrequency, iSamplesQty, iReplica, "Delta Time_0->3",
             lTimes[3] - lTimes[0]);
         // DFT method execution
-        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
             iSamplingFrequency, iSamplesQty, iReplica, "Delta Time_3->4",
             lTimes[4] - lTimes[3]);
         // Saving DFT results
-        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
             iSamplingFrequency, iSamplesQty, iReplica, "Delta Time_5->6",
             lTimes[6] - lTimes[5]);
         // DFT execution as is
-        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
             iSamplingFrequency, iSamplesQty, iReplica, "Delta Time_7->10",
             lTimes[10] - lTimes[7]);
         // DFT-Time loop execution, only first measurement
-        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sFileName,
+        fprintf(fptr, "%s;%zu;%zu;%zu;%s;%.9ld\n", sSignPath,
             iSamplingFrequency, iSamplesQty, iReplica, "Delta Time_8->9",
             lTimes[9] - lTimes[8]);
         fclose(fptr);
@@ -167,8 +174,8 @@ int main(int argc, char *argv[]) {
     // -- DEALLOCATE THE MEMORY -- //
     // --------------------------- //
     free(lTimes);
-    free(sFileName);
-    free(sDesc);
+    free(sSignPath);
+    free(sSignName);
     free(sFourierType);
     free(fSamplesBuffer);
     free(cSpectrum);

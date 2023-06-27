@@ -5,6 +5,7 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
+#include <omp.h>
 
 #define SUCCESS 0
 #define FAIL    0

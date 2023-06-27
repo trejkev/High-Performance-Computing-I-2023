@@ -12,14 +12,17 @@ LINTFILTERS   = $\
 	-readability/casting,$\
 	-runtime/references
 
-PROCESSES     = 64
-THREADS       = 6
+PROCESSES     = 8
+THREADS       = 2
 REPEAT        = 1
-SAMPLING_FREQ = 2048# 2^n = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, ...}
+SAMPLING_FREQ = 16384# 2^n = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, ...}
 SIGNAL_DESC   = square_50Hz# {sin_50Hz, sin_50Hz_PLUS_sin_450Hz, 4_PLUS_sin_50Hz_PLUS_sin_450Hz, sin_1Hz, cos_1Hz, square_50Hz, sawtooth_150Hz}
-FOURIERTYPE   = fft#{fft, dft}
+FOURIERTYPE   = dft#{fft, dft}
 
 ################################ FT COMPUTATION ################################
+
+$(PROJECTNAME)_concurrent: clean $(HEADERS)
+	$(GNU_COMPILER) $(SOURCES) -fopenmp $(FLAGS) -o ./bin/$(PROJECTNAME)
 
 $(PROJECTNAME): clean $(HEADERS)
 	$(GNU_COMPILER) $(SOURCES) $(FLAGS) -o ./bin/$(PROJECTNAME)
