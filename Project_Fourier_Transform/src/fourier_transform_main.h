@@ -6,6 +6,7 @@
 #include <time.h>
 #include <string.h>
 #include <omp.h>
+#include <mpi.h>
 
 #define SUCCESS 0
 #define FAIL    0
@@ -16,7 +17,8 @@ typedef struct {
 } Complex;
 
 /* Sequential implementation of DFT */
-Complex* dft(float* fSampledSignal, size_t iSamplesQty, long* lTimes);
+Complex* dft(float* fSampledSignal, size_t iSamplesQty, long* lTimes,
+    int iRanksQty, int iMyRank);
 
 /* Pre-processor to bring the fft the input signal formatted to be complex */
 Complex* fft_preprocessor(float *signal, size_t iSamplesQty, long* lTimes);

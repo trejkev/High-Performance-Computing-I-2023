@@ -6,23 +6,32 @@
 ////////////////////////////////////////////////////////////////////////////////
 //                      ITERATIVE IMPLEMENTATION OF DFT                       //
 ////////////////////////////////////////////////////////////////////////////////
-Complex* dft(float* fSampledSignal,
-    size_t iSamplesQty, long* lTimes) {
+Complex* dft(float* fSampledSignal, size_t iSamplesQty, long* lTimes,
+    int iRanksQty, int iMyRank) {
     // FFT frequency components are stored here
     Complex* cSpectrum = (Complex*)calloc(iSamplesQty, sizeof(Complex));
+    size_t iBlockSize = iSamplesQty/iRanksQty;
+    size_t iInit = iMyRank*iBlockSize;
+    size_t iEnd = iInit + iBlockSize;
+    if (iMyRank == iRanksQty - 1) {
+        iEnd = iSamplesQty;
+    }
 
     lTimes[7] = timeReader();
-    for (size_t iFreqIndex = 0; iFreqIndex < iSamplesQty; iFreqIndex++) {
+    for (size_t iFreqIndex = iInit; iFreqIndex < iEnd; iFreqIndex++) {
         if (iFreqIndex == 0) {  // Read only the first time entering
             lTimes[8] = timeReader();
         }
+        float fReal = 0;
+        float fImag = 0;
+        #pragma omp parallel for reduction(+:fReal) reduction(+:fImag)
         for (size_t iTimeIndex = 0; iTimeIndex < iSamplesQty; iTimeIndex++) {
             float fAngle = 2.0*M_PI*iFreqIndex*iTimeIndex/iSamplesQty;
-            cSpectrum[iFreqIndex].real +=
-                fSampledSignal[iTimeIndex]*cos(fAngle);
-            cSpectrum[iFreqIndex].imag -=
-                fSampledSignal[iTimeIndex]*sin(fAngle);
+            fReal += fSampledSignal[iTimeIndex]*cos(fAngle);
+            fImag += fSampledSignal[iTimeIndex]*sin(fAngle);
         }
+        cSpectrum[iFreqIndex].real = fReal;
+        cSpectrum[iFreqIndex].imag = fImag;
         if (iFreqIndex == 0) {  // Read only the first time entering
             lTimes[9] = timeReader();
         }
