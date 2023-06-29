@@ -15,9 +15,10 @@ int signalGenerator(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
     size_t iSamples;
-    if (argc >= 7) {
-        sscanf(argv[4], "%s", sDesc);
-        sscanf(argv[5], "%zu", &iSamples);
+    if (argc >= 6) {
+        sscanf(argv[1], "%s", sDesc);
+        sscanf(argv[4], "%zu", &iSamples);
+        printf("    Generating signal %s with %zu samples\n", sDesc, iSamples);
     }
 
     snprintf(sSignalPath, 400*sizeof(char), "%s%s%s",

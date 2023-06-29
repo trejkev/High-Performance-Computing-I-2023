@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     // -------------------- //
     // -- GET PARAMETERS -- //
     // -------------------- //
-    if (argc >= 7) {
+    if (argc >= 6) {
         if (iMyRank == 0) signalGenerator(argc, argv);
         sSignPath    = (char*)calloc(300, sizeof(char));
         sSignName    = (char*)calloc(300, sizeof(char));
@@ -39,7 +39,7 @@ int main(int argc, char *argv[]) {
 
         sscanf(argv[2], "%zu", &iThreadsQty);
         sscanf(argv[3], "%zu", &iReplicas);
-        sscanf(argv[6], "%s" , sFourierType);
+        sscanf(argv[5], "%s" , sFourierType);
         sscanf(argv[1], "%s" , sSignName);
 
         snprintf(sSignPath, 300*sizeof(char), "%s%s%s",
