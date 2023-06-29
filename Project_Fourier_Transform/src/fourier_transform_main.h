@@ -8,6 +8,10 @@
 #include <omp.h>
 #include <mpi.h>
 
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+
 #define SUCCESS 0
 #define FAIL    0
 
