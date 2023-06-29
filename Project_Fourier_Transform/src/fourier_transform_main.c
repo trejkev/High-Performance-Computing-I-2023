@@ -49,9 +49,9 @@ int main(int argc, char *argv[]) {
         if (iMyRank == 0) {
             printf("    Input parameters:\n");
             printf("        Input file: %s\n", sSignPath);
+            printf("        Replicas: %zu\n", iReplicas);
             printf("        Processes quantity: %d\n", iRanksQty);
             printf("        Threads quantity: %zu\n", iThreadsQty);
-            printf("        Replicas: %zu\n", iReplicas);
         }
     } else {
         if (iMyRank == 0) printf("    Missing arguments!\n");
@@ -109,7 +109,10 @@ int main(int argc, char *argv[]) {
             cSpectrum = dft(fSamplesBuffer, iSamplesQty, lTimes, 
                 iRanksQty  , iMyRank);
         } else if (strcmp(sFourierType, "fft") == 0) {
-            cSpectrum = fft_preprocessor(fSamplesBuffer, iSamplesQty, lTimes);
+            if (iMyRank == 0) {
+                cSpectrum = fft_preprocessor(fSamplesBuffer, iSamplesQty,
+                    lTimes);
+            }
         } else {
             printf("%s is not a valid ft type\n", sFourierType);
             return FAIL;
@@ -145,18 +148,33 @@ int main(int argc, char *argv[]) {
                     MPI_STATUS_IGNORE);
                 fptr = fopen(sResultsFileName, "a");
             }
-            size_t iInit = iMyRank*iSamplesQty/iRanksQty;
-            size_t iEnd = iInit + iSamplesQty/iRanksQty;
-            for (size_t iFreqComp = iInit; iFreqComp < iEnd; iFreqComp++) {
-                if (iFreqComp < iNyquistLimit) {
-                    float fReal       = cSpectrum[iFreqComp].real;
-                    float fImag       = cSpectrum[iFreqComp].imag;
-                    float fAmplitude  = sqrt(fReal*fReal + fImag*fImag)/iSamplesQty;
-                    float fAngle      = atan2(fImag, fReal);
-                    float fFrequency  = 
-                        (float)iFreqComp*(iSamplingFrequency/iSamplesQty);
-                    fprintf(fptr, "%.1f;%.8f;%.8f;%.8f;%.8f\n",
-                        fFrequency, fReal, fImag, fAmplitude, fAngle);
+            if (strcmp(sFourierType, "dft") == 0) {
+                size_t iInit = iMyRank*iSamplesQty/iRanksQty;
+                size_t iEnd = iInit + iSamplesQty/iRanksQty;
+                for (size_t iFreqComp = iInit; iFreqComp < iEnd; iFreqComp++) {
+                    if (iFreqComp < iNyquistLimit) {
+                        float fReal       = cSpectrum[iFreqComp].real;
+                        float fImag       = cSpectrum[iFreqComp].imag;
+                        float fAmplitude  = sqrt(fReal*fReal + fImag*fImag)/iSamplesQty;
+                        float fAngle      = atan2(fImag, fReal);
+                        float fFrequency  = 
+                            (float)iFreqComp*(iSamplingFrequency/iSamplesQty);
+                        fprintf(fptr, "%.1f;%.8f;%.8f;%.8f;%.8f\n",
+                            fFrequency, fReal, fImag, fAmplitude, fAngle);
+                    }
+                }
+            } else {
+                if (iMyRank == 0) {
+                    for (size_t iFreqComp = 0; iFreqComp < iNyquistLimit; iFreqComp++) {
+                        float fReal       = cSpectrum[iFreqComp].real;
+                        float fImag       = cSpectrum[iFreqComp].imag;
+                        float fAmplitude  = sqrt(fReal*fReal + fImag*fImag)/iSamplesQty;
+                        float fAngle      = atan2(fImag, fReal);
+                        float fFrequency  = 
+                            (float)iFreqComp*(iSamplingFrequency/iSamplesQty);
+                        fprintf(fptr, "%.1f;%.8f;%.8f;%.8f;%.8f\n",
+                            fFrequency, fReal, fImag, fAmplitude, fAngle);
+                    }
                 }
             }
             fclose(fptr);
@@ -226,7 +244,11 @@ int main(int argc, char *argv[]) {
     free(sSignName);
     free(sFourierType);
     free(fSamplesBuffer);
-    free(cSpectrum);
+    if (strcmp(sFourierType, "dft") == 0) {
+        free(cSpectrum);
+    } else {
+        if (iMyRank == 0) free(cSpectrum);
+    }
     free(sResultsFileName);
 
 
