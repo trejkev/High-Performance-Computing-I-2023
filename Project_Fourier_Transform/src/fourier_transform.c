@@ -13,6 +13,7 @@ Complex* dft(float* fSampledSignal, size_t iSamplesQty, long* lTimes,
     size_t iBlockSize = iSamplesQty/iRanksQty;
     size_t iInit = iMyRank*iBlockSize;
     size_t iEnd = iInit + iBlockSize;
+    // Resize last rank to iterate up to the last sample
     if (iMyRank == iRanksQty - 1) {
         iEnd = iSamplesQty;
     }
