@@ -131,9 +131,15 @@ int main(int argc, char *argv[]) {
         // -- EXHIBIT THE RESULTS -- //
         // ------------------------- //
         sResultsFileName = (char*)calloc(400, sizeof(char));
-        snprintf(sResultsFileName, 400*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
-            "./results/", sFourierType, "_results_", sSignName, "_SampFreq_",
-            iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
+        snprintf(sResultsFileName, 400*sizeof(char),
+            "%s%s%s%s%s%zu%s%zu%s%d%s%zu%s",
+                              "./results/" , sFourierType, 
+                              "_results_"  , sSignName, 
+                              "_SampFreq_" , iSamplingFrequency,
+                              "_SampQty_"  , iSamplesQty,
+                              "_Processes_", iRanksQty, 
+                              "_Threads_"  , iThreadsQty, 
+                              ".csv");
 
         // All results will be the same, thus, save only the first replica
         if (iReplica == 0) {
@@ -188,9 +194,15 @@ int main(int argc, char *argv[]) {
         // --      SAVE TIMES     -- //
         // ------------------------- //
         if (iMyRank == 0) {
-            snprintf(sResultsFileName, 400*sizeof(char), "%s%s%s%s%s%zu%s%zu%s",
-                "./results/", sFourierType, "_time_results_", sSignName,
-                "_SampFreq_", iSamplingFrequency, "_SampQty_", iSamplesQty, ".csv");
+            snprintf(sResultsFileName, 400*sizeof(char), 
+                "%s%s%s%s%s%zu%s%zu%s%d%s%zu%s" ,
+                                "./results/"    , sFourierType,
+                                "_time_results_", sSignName,
+                                "_SampFreq_"    , iSamplingFrequency,
+                                "_SampQty_"     , iSamplesQty,
+                                "_Processes_"   , iRanksQty, 
+                                "_Threads_"     , iThreadsQty, 
+                                ".csv");
             if (iReplica == 0) {
                 fptr = fopen(sResultsFileName, "w");
                 fprintf(fptr,
