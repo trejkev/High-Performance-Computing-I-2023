@@ -3,7 +3,7 @@ MPI_COMPILER  = mpicc
 GNU_COMPILER  = gcc
 SOURCES       = ./src/*.c
 HEADERS       = ./src/*.h
-FLAGS         = -fopenmp -g -Wall -Wextra -lm -std=c99
+FLAGS         = -fopenmp -g -Wall -Wextra -lm
 ASAN_FLAGS    = -fsanitize=address -fno-omit-frame-pointer
 LINTFILTERS   = $\
 	-build/c++11,$\
@@ -12,9 +12,9 @@ LINTFILTERS   = $\
 	-readability/casting,$\
 	-runtime/references
 
-PROCESSES     = 3
-THREADS       = 2
-REPEAT        = 8
+PROCESSES     = 1
+THREADS       = 1
+REPEAT        = 4
 SAMPLING_FREQ = 16384# 2^n = {1, 2, 4, ... , 1024, 2048, ... , 32768, 65536, ...}
 SIGNAL_DESC   = square_50Hz# {sin_50Hz, sin_50Hz_PLUS_sin_450Hz, 4_PLUS_sin_50Hz_PLUS_sin_450Hz, sin_1Hz, cos_1Hz, square_50Hz, sawtooth_150Hz}
 FOURIERTYPE   = dft#{fft, dft}
