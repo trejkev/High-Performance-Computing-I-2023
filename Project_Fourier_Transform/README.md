@@ -87,16 +87,20 @@ This code simply computes the Discrete Fourier Transformation to any discrete/sa
   <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/7c89f36b-77c6-4516-a089-cbb62411882e" />
 </p>
 
-## Sequential Execution Time Results
+## Sequential Execution Time Trending Results: Sizing the Problem
 
-There were executed some tests to be able to compare the time DFT takes, compared to FFT, both in sequential execution.
+There were executed some tests to be able to compare the time DFT takes, compared to FFT, both in sequential execution. The intention of this section is to provide the reader with enough information to understand how big is the problem with performing a DFT efficiently.
+
+The tests were executed using a relatively new AMD RYZEN 7 4000 SERIES processor for user-side purposes, with 8 cores and 16 threads, and an Intel Xeon Phi KNL, a relatively old processor, but intended for server-side purposes, which means, more cores and threads, 64 cores and 256 threads to be more precise. The advantage of RYZEN over Xeon here is that RYZEN can run up to 4.4 GHz, while Xeon Phi up to 1.5 GHz, almost 3 times faster.
+
+Because of the limited capabilities of RYZEN processor, it was only used to take a look at the sequential results, since performing concurrent testing that lets conclude things is quite difficult with the limited resources provided.
 
 ### Discrete Fourier Transform Sequential Time Results using RYZEN 7 4000 SERIES
 
-Since DFT takes more computational time, the trials were executed up to  65536, which is, for this code, the minimum frequency to accomplish Nyquist theorem. As shown in the figure below, the elapsed time starts growing exponentially, ending with an elapsed time of about 140 seconds for 65536 samples per second, analyzed through a single second.
+Since DFT takes more computational time, the trials were executed up to  65536, which is, for this code, the minimum frequency to accomplish Nyquist theorem for a human-audible signal. As shown in the figure below, the elapsed time starts growing exponentially, ending with an elapsed time of about 140 seconds for 65536 samples per second, analyzed through a single second.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/5eef58f6-dfee-4530-ad93-14aef8b0b95d" />
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/507c3ad7-50a7-4d45-9898-9918f181c82e" />
 </p>
 
 ### Fast Fourier Transform Sequential Time Results using RYZEN 7 4000 SERIES
@@ -104,7 +108,5 @@ Since DFT takes more computational time, the trials were executed up to  65536, 
 Since FFT takes less computational time, the trials were executed up to  524288, which is, 8 times the maximum frequency used with DFT. As shown in the figure below, the elapsed time starts growing linearly, however, because of the enhanced procedure, it ends up with an elapsed time of about 0.18 seconds, which is about 778 times faster than the DFT, making it evident that FFT is more convenient than DFT from time complexity point of view.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/69789601-23b1-4daa-a1b8-b6aedb0471b1" />
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/e5216e6f-da3b-4d16-8486-5db141bfc76b" />
 </p>
-
-
