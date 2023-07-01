@@ -115,6 +115,17 @@ Since FFT takes less computational time, the trials were executed up to  524288,
 
 Since this code has both, DFT and FFT, it was analyzed the need for parallelization of they both.
 
+
+### DFT Concurrency Analysis
+
+This transformation is composed by two nested for loops, which points directly to something that can be executed concurrently. See the figure below.
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/6449b331-fd8b-463f-ba5e-98e9b12d80a7" />
+</p>
+
+To avoid issues with shared memory dealing with distributed memory, a strategy of distributed memory dealing with shared memory was used. Therefore, the outer loop is to be concurrently executed with OpenMPI, while the inner loop is to be executed with OpenMP, reason why only synchronization is needed to record the results, and the complexity of the threads is fully managed by each of the processes.
+
 ### FFT Concurrency Analysis
 
 Looking at FFT code, it is already well optimized, with a computational complexity of $O(n*log(n)$, however, it was analyzed to define which concurrency strategy may fit the best. The FFT code has only one critical section that could be used for parallelization, which is a for loop embedded in it, see the figure below.
@@ -128,16 +139,6 @@ In regards to OpenMPI, since it is a process-based concurrency, it separates the
 Regarding OpenMP, the problem resides in the complexity of the data structure being used, and the operations being applied to it, because the data structure is composed of multiple components, it is not possible to declare it as private, because of the complexity of its operations, it is not possible to perform atomic operations with this data structure, and since it is a shared data structure, OpenMP will internally perform synchronization strategies that will reduce heavily the performance of the application, likely beyond its concurrent version.
 
 Since FFT is an already-optimized algorithm, no concurrent strategy will be applied, but will be used for reference of DFT results.
-
-### DFT Concurrency Analysis
-
-This transformation is composed by two nested for loops, which points directly to something that can be executed concurrently. See the figure below.
-
-<p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/6449b331-fd8b-463f-ba5e-98e9b12d80a7" />
-</p>
-
-To avoid issues with shared memory dealing with distributed memory, a strategy of distributed memory dealing with shared memory was used. Therefore, the outer loop is to be concurrently executed with OpenMPI, while the inner loop is to be executed with OpenMP, reason why only synchronization is needed to record the results, and the complexity of the threads is fully managed by each of the processes.
 
 
 ## Concurrent Results
