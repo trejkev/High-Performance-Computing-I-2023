@@ -30,4 +30,4 @@ TestCase;ProcessesQty;ThreadsQty;FT_Type;Replicas;SamplesQty;Signal
 27;14;14;dft;30;16384;square_50Hz
 28;15;15;dft;30;16384;square_50Hz
 29;16;16;dft;30;16384;square_50Hz
-30;32;32;dft;30;16384;square_50Hz
+30;17;17;dft;30;16384;square_50Hz
