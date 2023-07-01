@@ -41,7 +41,35 @@ Into the makefile are some variables of interest to try with different scenarios
 
 Note: The code will use both, distributed and shared memory concurrency, to reduce as much as possible the execution time.
 
-## Sequential Time Results
+## Code Functionality
+
+This code simply computes the Discrete Fourier Transformation to any discrete/sampled signal, where the sampling frequency is well known. For verification purposes, some standard functions were sampled, their resulting samples for a total of four periods, and their corresponding Fourier Transformation amplitude is shown below.
+
+### Square at 50 Hz
+
+#### Time Samples
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/2de5bd0e-359d-4f7c-9be7-86628a3f1772" />
+</p>
+
+#### Fourier Transform of the Signal
+
+### Sawtooth at 150 Hz
+
+#### Time Samples
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/ef84d39e-8fb0-410d-abe5-ea854c638e56" />
+</p>
+
+#### Fourier Transform of the Signal
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/7c89f36b-77c6-4516-a089-cbb62411882e" />
+</p>
+
+## Sequential Execution Time Results
 
 There were executed some tests to be able to compare the time DFT takes, compared to FFT, both in sequential execution.
 
