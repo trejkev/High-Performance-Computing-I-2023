@@ -45,12 +45,22 @@ Note: The code will use both, distributed and shared memory concurrency, to redu
 
 This code simply computes the Discrete Fourier Transformation to any discrete/sampled signal, where the sampling frequency is well known. For verification purposes, some standard functions were sampled, their resulting samples for a total of four periods, and their corresponding Fourier Transformation amplitude is shown below.
 
+### 4 + sin at 50 Hz + sin at 450 Hz
+
+#### Time Samples
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/cce6c024-a84b-481e-b748-4c37ea39e398" />
+</p>
+
+#### Fourier Transform of the Signal
+
 ### Square at 50 Hz
 
 #### Time Samples
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/2de5bd0e-359d-4f7c-9be7-86628a3f1772" />
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/7ed63dd7-f985-4873-8ca1-ba52747f8014" />
 </p>
 
 #### Fourier Transform of the Signal
