@@ -55,6 +55,10 @@ This code simply computes the Discrete Fourier Transformation to any discrete/sa
 
 #### Fourier Transform of the Signal
 
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/e9d36f5f-2df5-45bd-b919-f6508f54d0c4" />
+</p>
+
 ### Square at 50 Hz
 
 #### Time Samples
