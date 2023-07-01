@@ -55,6 +55,10 @@ This code simply computes the Discrete Fourier Transformation to any discrete/sa
 
 #### Fourier Transform of the Signal
 
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/7f9767b3-1e0d-40bd-89c2-fe03d0412edb" />
+</p>
+
 ### Sawtooth at 150 Hz
 
 #### Time Samples
