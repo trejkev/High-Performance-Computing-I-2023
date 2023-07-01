@@ -192,7 +192,7 @@ With this first analysis, it was demonstrated that, when increasing the number o
 Since the processes approach consists of individual applications communicating between them, we have no limitation of threads per core, as the last section analysis does, that uses a single core and its threads availability because of its nature. Here, individual applications with one thread each means we have a total of 64 cores/4 threads each maximum capacity, which means that growing the processes quantity up to 256 would keep enhancing the elapsed time, and this is demonstrated in the figure below. However, it starts to asymptotically reduce the time enhancement rate when approaching about 0.8 seconds.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/e322df4c-9fb9-4f81-bcb8-12794558008d" width="800"/>
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/500ab69e-e53f-44fb-90f9-fb6730f6e1b3" width="800"/>
 </p>
 
 ### DFT with Equal Processes and Threads
@@ -205,8 +205,8 @@ For these tests, since each core has only support for 4 threads, the time reduct
 
 From the figure above, consider that 32 processes (each using 32 threads) were expected to heavily damage the elapsed time trending because these processors are 64 cores/4 threads each, meaning maximum individual processing units of 256, achieved when we used 16 cores and 16 threads, beyond this bound any application will start to degrade.
 
-To bring extra data to the graph above, below is shown a graph comparing the real expected time reduction from trial to trial, compared to the actual time reduction obtained from trial to trial. And here what can be concluded is that even when threads are becoming more inefficient after 4 threads, its impact on the total elapsed time is not as huge as if it was at the same level of processes loop, since their idle time may not be huge enough to shadow the positive impact of adding another process to the outer loop. However, even with this fact, is a short time reduction, that slowly starts to increase, as we can see when comparing using 14 threads with using 16 threads, where theoretically 16 threads will have to split the processing units availability, with an average availability of 25%/thread.
+To bring extra data to the graph above, below is shown a graph comparing the expected time portion to be removed from trial to trial, which is how much time I may get rid with the change of processes and threads made in the present experiment, compared to the real time removal obtained in the actual experiment, compared to the last experiment. And here what can be concluded is that even when threads are becoming more inefficient after 4 threads, its impact on the total elapsed time is not as huge as if it was at the same level of processes loop, since their idle time may not be huge enough to shadow the positive impact of adding another process to the outer loop. However, even with this fact, is a short time reduction, that slowly starts to increase, as we can see when comparing using 14 threads with using 16 threads, where theoretically 16 threads will have to split the processing units availability, with an average availability of 25%/thread.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/dc93d98e-562c-4a33-a671-c5c8f4225b8b" width="800"/>
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/8fede683-d1c7-47f1-ba82-3ed06a9c7474" width="800"/>
 </p>
