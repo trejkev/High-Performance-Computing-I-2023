@@ -174,8 +174,15 @@ To generate data regarding the concurrency implemented, it was created the follo
 |      19      |         6        |        6       |     dft     |      30      |      16384     | square_50Hz |
 |      20      |         7        |        7       |     dft     |      30      |      16384     | square_50Hz |
 |      21      |         8        |        8       |     dft     |      30      |      16384     | square_50Hz |
-|      22      |        16        |       16       |     dft     |      30      |      16384     | square_50Hz |
-|      23      |        32        |       32       |     dft     |      30      |      16384     | square_50Hz |
+|      22      |         9        |        9       |     dft     |      30      |      16384     | square_50Hz |
+|      23      |        10        |       10       |     dft     |      30      |      16384     | square_50Hz |
+|      24      |        11        |       11       |     dft     |      30      |      16384     | square_50Hz |
+|      25      |        12        |       12       |     dft     |      30      |      16384     | square_50Hz |
+|      26      |        13        |       13       |     dft     |      30      |      16384     | square_50Hz |
+|      27      |        14        |       14       |     dft     |      30      |      16384     | square_50Hz |
+|      28      |        15        |       15       |     dft     |      30      |      16384     | square_50Hz |
+|      29      |        16        |       16       |     dft     |      30      |      16384     | square_50Hz |
+|      30      |        17        |       17       |     dft     |      30      |      16384     | square_50Hz |
 
 Based on this test plan, a total of four comparison analyses were performed, these are shown below.
 
@@ -197,16 +204,18 @@ Since the processes approach consists of individual applications communicating b
 
 ### DFT with Equal Processes and Threads
 
-For these tests, since each core has only support for 4 threads, the time reduction linearity trending will be led by the processes quantity, and the enhancement reduction will be led by the threads quantity, they both will internally fight to determine the efficiency of the application, however, since the outer loop is being divided by processes, if processes keep growing, time will keep falling, but likely with a slower rate from time to time when threads keep growing, and the real impact will depend on the time threads processing take from each process iteration. 
+For these tests, since each core has only support for 4 threads, the time reduction linearity trending will be led by the processes quantity, and the enhancement reduction will be led by the threads quantity, they both will internally fight to determine the efficiency of the application, however, since the outer loop is being divided by processes, if processes keep growing, time will keep falling, but likely with a slower rate from time to time when threads keep growing, and the real impact will depend on the time that the threads processing takes from each process iteration. 
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/8766fb99-5734-4313-9e61-ba60a6fdd6f0" width="800"/>
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/cef1f885-069a-47d0-8df6-2989d25b7545" width="800"/>
 </p>
 
-From the figure above, consider that 32 processes (each using 32 threads) were expected to heavily damage the elapsed time trending because these processors are 64 cores/4 threads each, meaning maximum individual processing units of 256, achieved when we used 16 cores and 16 threads, beyond this bound any application will start to degrade.
+From the figure above, consider that the test case using 17 processes (each using 17 threads) was expected to step back the elapsed time trending because these processors are 64 cores/4 threads each, meaning the maximum individual processing units is 256, achieved when we used 16 cores and 16 threads, beyond this bound any application will start to degrade.
 
-To bring extra data to the graph above, below is shown a graph comparing the expected time portion to be removed from trial to trial, which is how much time I may get rid with the change of processes and threads made in the present experiment, compared to the real time removal obtained in the actual experiment, compared to the last experiment. And here what can be concluded is that even when threads are becoming more inefficient after 4 threads, its impact on the total elapsed time is not as huge as if it was at the same level of processes loop, since their idle time may not be huge enough to shadow the positive impact of adding another process to the outer loop. However, even with this fact, is a short time reduction, that slowly starts to increase, as we can see when comparing using 14 threads with using 16 threads, where theoretically 16 threads will have to split the processing units availability, with an average availability of 25%/thread.
+To bring extra data to the graph above, below is shown a graph comparing the expected time reduction rate (which is ideally, considering a 1-operation nested loop application, actual processing units needed divided by old processing units needed), compared to the real time reduction rate obtained in the experiment (which is the actual time divided by the old time). And here what can be concluded is that even when threads are becoming more inefficient after 4 threads, its impact on the total elapsed time is not as huge as if it was at the same level of processes loop, since their idle time may not be huge enough to shadow the positive impact of adding another process to the outer loop. 
+
+However, even with this fact, after 8 threads things start to get messy, since the actual time reduction rate is not converging to the theoretical time reduction rate, and this could be related to resource availability, since this processor is in a cluster, or due to the same issue we have been talking about, related to the core threads. Also, consider that the time enhancement comes when the reduction rate is over 100%, look that when using 17 processes and 17 threads, the reduction rate was below 100%, which means that using 17 processes with 17 threads gives worst results than if we use 16 processes with 16 threads, and this is because of the maximum processing units mentioned above.
 
 <p align="center">
-  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/8fede683-d1c7-47f1-ba82-3ed06a9c7474" width="800"/>
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/657591b1-1f07-47ba-a51a-3b82504ad69d" width="800"/>
 </p>
