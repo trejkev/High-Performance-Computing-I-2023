@@ -147,7 +147,7 @@ Since FFT is an already-optimized algorithm, no concurrent strategy will be appl
 
 ## Concurrent Results using Intel Xeon Phi KNL
 
-To generate data regarding the concurrency implemented, it was created the following test plan. Since the system is using a Hybrid version of concurrency by processes and threads, it was needed to mix the number of processes and threads to bring here what the enhancements provided by each of them are. The test plan followed is shown below. The results files are into ./results/concurrent_results_Xeon_Phi_KNL/TestCase{number}, and the data summary is into ./results/concurrent_results_Xeon_Phi_KNL/Data Collection.xlsx file.
+To generate data regarding the concurrency implemented, it was created the following test plan. Since the system is using a Hybrid version of concurrency by processes and threads, it was needed to mix the number of processes and threads to bring here what the enhancements provided by each of them are. The test plan followed is shown below. The results files are into _./results/concurrent_results_Xeon_Phi_KNL/TestCase{number}_, and the data summary is into _./results/concurrent_results_Xeon_Phi_KNL/Data Collection.xlsx_ file.
 
 | **TestCase** | **ProcessesQty** | **ThreadsQty** | **FT_Type** | **Replicas** | **SamplesQty** |  **Signal** |
 |:------------:|:----------------:|:--------------:|:-----------:|:------------:|:--------------:|:-----------:|
