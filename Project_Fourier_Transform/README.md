@@ -184,7 +184,42 @@ To generate data regarding the concurrency implemented, it was created the follo
 |      29      |        16        |       16       |     dft     |      30      |      16384     | square_50Hz |
 |      30      |        17        |       17       |     dft     |      30      |      16384     | square_50Hz |
 
-Based on this test plan, a total of four comparison analyses were performed, these are shown below.
+Based on this test plan, a total of four comparison analyses were performed, these are shown in the following sections. Below you can see a brief summary of the results.
+
+|    **Test Case**   | **Average Elapsed Time (s)** | **StDev Elapsed Time (s)** |
+|:------------------:|:----------------------------:|:--------------------------:|
+|      TC-1 FFT      |          0.067834285         |         0.002386064        |
+|   DFT TC0 - P1-T1  |         126.577029163        |         0.120709428        |
+|   DFT TC1 - P1-T2  |         77.452961790         |         0.125583840        |
+|   DFT TC2 - P1-T4  |         50.857977723         |         0.306680468        |
+|   DFT TC3 - P1-T8  |         54.621895388         |         0.382310272        |
+|  DFT TC4 - P1-T16  |         59.795868889         |         0.425795618        |
+|  DFT TC5 - P1-T32  |         67.371630778         |         0.115824515        |
+|  DFT TC6 - P1-T64  |         82.036846056         |         0.090110641        |
+|   DFT TC7 - P2-T1  |         65.622454261         |         0.114748130        |
+|   DFT TC8 - P4-T1  |         34.006365772         |         0.343188470        |
+|   DFT TC9 - P8-T1  |         17.168688507         |         0.115576449        |
+|  DFT TC10 - P16-T1 |          8.629022837         |         0.070237694        |
+|  DFT TC11 - P32-T1 |          4.345066759         |         0.037889951        |
+|  DFT TC12 - P64-T1 |          2.261221373         |         0.053238534        |
+| DFT TC13 - P128-T1 |          1.380933830         |         0.113824191        |
+| DFT TC14 - P256-T1 |          0.909411625         |         0.155320637        |
+|  DFT TC15 - P2-T2  |         36.427501288         |         0.011786856        |
+|  DFT TC16 - P3-T3  |         15.693200038         |         0.159391771        |
+|  DFT TC17 - P4-T4  |          9.051283947         |         0.076436132        |
+|  DFT TC18 - P5-T5  |          5.864844470         |         0.028218700        |
+|  DFT TC19 - P6-T6  |          4.097550577         |         0.013295580        |
+|  DFT TC20 - P7-T7  |          3.020534174         |         0.014982683        |
+|  DFT TC21 - P8-T8  |          2.358184507         |         0.051053249        |
+|  DFT TC22 - P9-T9  |          2.207578782         |         0.050302690        |
+| DFT TC23 - P10-T10 |          1.937091388         |         0.067751142        |
+| DFT TC24 - P11-T11 |          1.549517446         |         0.112811472        |
+| DFT TC25 - P12-T12 |          1.374692545         |         0.034771085        |
+|  DFT TC26 - P3-T13 |          1.176897194         |         0.039382856        |
+| DFT TC27 - P14-T14 |          1.116949623         |         0.007218447        |
+| DFT TC28 - P15-T15 |          0.997025596         |         0.017849729        |
+| DFT TC29 - P16-T16 |          0.919717943         |         0.230910412        |
+| DFT TC30 - P17-T17 |          1.436168732         |         0.190551255        |
 
 ### DFT with 1 Process and 2^n Threads
 
