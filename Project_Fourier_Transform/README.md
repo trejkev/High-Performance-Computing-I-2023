@@ -184,7 +184,7 @@ To generate data regarding the concurrency implemented, it was created the follo
 |      29      |        16        |       16       |     dft     |      30      |      16384     | square_50Hz |
 |      30      |        17        |       17       |     dft     |      30      |      16384     | square_50Hz |
 
-Based on this test plan, a total of three comparison analyses were performed, these are shown below.
+Based on this test plan, a total of four comparison analyses were performed, these are shown below.
 
 ### DFT with 1 Process and 2^n Threads
 
@@ -219,3 +219,17 @@ However, even with this fact, after 8 threads things start to get messy, since t
 <p align="center">
   <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/657591b1-1f07-47ba-a51a-3b82504ad69d" width="800"/>
 </p>
+
+### Concurrent DFT vs Sequential FFT
+
+After all these experiments, the best scenarios of concurrent execution of the DFT were compared to the sequential version of FFT, and the results can be seen in the figure below. As you can tell, even with concurrency at max for a single node, DFT is not being capable to defeat FFT, since FFT is in the order of milliseconds, while concurrent DFT is in the order of seconds.
+
+<p align="center">
+  <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/1f722c2a-ac57-42f5-89ed-dc815c57fbf9" width="800"/>
+</p>
+
+## Final Thoughts
+
+To conclude, just by looking at the results, here is where we must thank J.W. Cooley and John Tukey, for creating this incredibly fast way to compute the DFT, otherwise, lots of the use cases that need to recreate an analog signal in a digital computer would, at least, never be user-satisfactory, because of the time it would take to process the signal. Some applications impacted may be audio and video processing, image compression, communication systems coding and decoding, audio noise cancellation, magnetic resonance imaging, and many more applications that people don't even know they used and needed this amazing algorithm. 
+
+Based on these experiments, only imagine having to wait 126 seconds to get a single second of not-so-good audio through your earphones (not-so-good because to get a good-enough audio digital signal, we must sample it at double the maximum audible frequency for humans, which is 40 kHz, and this experiment was made with only 16384 samples, even below the maximum audible frequency), the latency would be unbearable that surely you may not use your earphones as you use them nowadays.
