@@ -3,7 +3,7 @@ MPI_COMPILER  = mpicc
 GNU_COMPILER  = gcc
 SOURCES       = ./src/*.c
 HEADERS       = ./src/*.h
-FLAGS         = -fopenmp -g -Wall -Wextra -lm
+FLAGS         = -fopenmp -g -Wall -Wextra -lm -I/usr/local/opt/llvm/include
 ASAN_FLAGS    = -fsanitize=address -fno-omit-frame-pointer
 LINTFILTERS   = $\
 	-build/c++11,$\
