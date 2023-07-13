@@ -31,10 +31,12 @@ Running the code is quite simple, you can use the Makefile provided to reproduce
 2. To run the code with Valgrind memory check, simply run _make memcheck_.
 3. To run the code with Address Sanitizer (aka asan) simply run _make asan_, and then _make run_.
 
+**Note:** Before running the code, the user must create a ./bin and ./test directories, so that the code is able to store the binaries and input files.
+
 Into the makefile are some variables of interest to try with different scenarios, these are enumerated below:
 1. PROCESSES: Unused for now, will bring to the game MPI library to concurrently execute the code with distributed memory.
 2. THREADS: Unused for now, will bring to the game OpenMP to concurrently execute the code with shared memory.
-3. REPEAT: Executes the code N times, and saves the time for each of the trials into a csv file located in the results directory.
+3. REPEAT: Executes the code N times, and saves the time for each of the trials into a CSV file located in the results directory.
 4. SAMPLING_FREQ: This will be the same as sample quantity, and denotes how many samples per second were taken from the original signal.
 5. SIGNAL_DESC: Defines which signal will be sampled, the list of signals available can be found in src/signal_generator.c.
 6. FOURIERTYPE: Defines if FFT or DFT will be executed, it is case sensitive and shall be sent lowercase.
