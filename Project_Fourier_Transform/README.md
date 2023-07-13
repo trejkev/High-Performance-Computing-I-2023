@@ -7,7 +7,7 @@ This project consisted of creating a Discrete and Fast Fourier Transform, optimi
 The implemented system for this project consists of the implementation of the Fourier Transform for discrete-time, on both versions, Discrete Fourier Transform, aka DFT, and Fast Fourier Transform, aka FFT.
 For both cases results are the same, the difference is on how to resolve the problem. DFT is mathematically equivalent to Fourier Transform in continuous time, simply changes the interpretation of some variables, like using summation instead of integration, and sampled version of f(t), instead of f(t) itself, both equations are shown below.
 
-$$F(\omega ) = \int_{-\infty }^{\infty }f(t)e^{-jwt}dt = \sum_{n=0}^{N-1} x_{n}e^{-\frac{2\pi i}{N}kn} = \sum_{n=0}^{N-1} x_{n}(cos(\frac{2\pi kn}{N})-j sin(\frac{2\pi kn}{N}))$$
+$$F(\omega ) = \int_{-\infty }^{\infty }f(t)e^{-jwt}dt = \sum_{n=0}^{N-1} x_{n}e^{-\frac{2\pi i}{N}kn} = \sum_{n=0}^{N-1} x_{n}(cos(\frac{2\pi kn}{N})-j*sin(\frac{2\pi kn}{N}))$$
 
 Where:
 1. $\omega = 2\pi f$
