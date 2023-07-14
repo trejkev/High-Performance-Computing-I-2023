@@ -3,6 +3,7 @@ COMPILER   = mpicc
 PROCESSES  = 4
 THREADS    = 3
 SOURCES    = ./src/*.c
+FLAGS      = -fopenmp -g -Wall -Wextra -lm -I/usr/local/opt/llvm/include
 
 
 LINTFILTERS = $\
@@ -12,11 +13,11 @@ LINTFILTERS = $\
 	-readability/casting,$\
 	-runtime/references
 
-$(FILENAME): clean
-	$(COMPILER) $(SOURCES) -fopenmp -o ./bin/$(FILENAME)
-
 run: $(FILENAME)
 	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME) $(THREADS)
+
+$(FILENAME): clean
+	$(COMPILER) $(SOURCES) $(FLAGS) -o ./bin/$(FILENAME)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
