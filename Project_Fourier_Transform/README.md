@@ -7,7 +7,7 @@ This project consisted of creating a Discrete and Fast Fourier Transform, optimi
 The implemented system for this project consists of the implementation of the Fourier Transform for discrete-time, on both versions, Discrete Fourier Transform, aka DFT, and Fast Fourier Transform, aka FFT.
 For both cases results are the same, the difference is on how to resolve the problem. DFT is mathematically equivalent to Fourier Transform in continuous time, simply changes the interpretation of some variables, like using summation instead of integration, and sampled version of f(t), instead of f(t) itself, both equations are shown below.
 
-$$F(\omega ) = \int_{-\infty }^{\infty }f(t)e^{-jwt}dt = \sum_{n=0}^{N-1} x_{n}e^{-\frac{2\pi i}{N}kn} = \sum_{n=0}^{N-1} x_{n}(cos(\frac{2\pi kn}{N})-j sin(\frac{2\pi kn}{N}))$$
+$$F(\omega ) = \int_{-\infty }^{\infty }f(t)e^{-jwt}dt = \sum_{n=0}^{N-1} x_{n}e^{-\frac{2\pi i}{N}kn} = \sum_{n=0}^{N-1} x_{n}(cos(\frac{2\pi kn}{N})-j*sin(\frac{2\pi kn}{N}))$$
 
 Where:
 1. $\omega = 2\pi f$
@@ -31,10 +31,12 @@ Running the code is quite simple, you can use the Makefile provided to reproduce
 2. To run the code with Valgrind memory check, simply run _make memcheck_.
 3. To run the code with Address Sanitizer (aka asan) simply run _make asan_, and then _make run_.
 
+**Note:** Before running the code, the user must create a ./bin and ./test directories, so that the code is able to store the binaries and input files.
+
 Into the makefile are some variables of interest to try with different scenarios, these are enumerated below:
 1. PROCESSES: Unused for now, will bring to the game MPI library to concurrently execute the code with distributed memory.
 2. THREADS: Unused for now, will bring to the game OpenMP to concurrently execute the code with shared memory.
-3. REPEAT: Executes the code N times, and saves the time for each of the trials into a csv file located in the results directory.
+3. REPEAT: Executes the code N times, and saves the time for each of the trials into a CSV file located in the results directory.
 4. SAMPLING_FREQ: This will be the same as sample quantity, and denotes how many samples per second were taken from the original signal.
 5. SIGNAL_DESC: Defines which signal will be sampled, the list of signals available can be found in src/signal_generator.c.
 6. FOURIERTYPE: Defines if FFT or DFT will be executed, it is case sensitive and shall be sent lowercase.
