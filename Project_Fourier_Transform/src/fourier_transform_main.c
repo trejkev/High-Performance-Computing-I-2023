@@ -264,5 +264,5 @@ int main(int argc, char *argv[]) {
     free(sResultsFileName);
 
 
-    return SUCCESS;
+    return EXIT_SUCCESS;
 }
