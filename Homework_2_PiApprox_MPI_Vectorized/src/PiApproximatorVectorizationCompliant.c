@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <math.h>  // Use floating abs
+#include <stdlib.h>
 #include "timeReader.h"
 
 #define PI 3.141592653589793238462643383279502884197
@@ -54,4 +55,6 @@ int main(int argc, char** argv) {
         printf("Columns;%d;PiApprox;%.32f;Error;%.32f;ElapsedTime;%.9lf\n",
             iColumnsQty, fArea, fError, fElapsedTimeSec);
     }
+
+    return EXIT_SUCCESS;
 }

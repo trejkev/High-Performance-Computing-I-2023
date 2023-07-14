@@ -3,7 +3,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <math.h>  // Use floating abs
-// #include <time.h>  // To deal with delta time measurements
+#include <stdlib.h>
 #include "timeReader.h"
 
 #define PI 3.141592653589793238462643383279502884197
@@ -82,4 +82,6 @@ int main(int argc, char** argv) {
         }
     }
     MPI_Finalize();
+
+    return EXIT_SUCCESS;
 }
