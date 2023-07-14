@@ -1,7 +1,8 @@
 FILENAME   = PiApproximator
 COMPILER   = mpicc
-PROCESSES  = 64
+PROCESSES  = 8
 SOURCES    = ./src/*.c
+FLAGS      = -g -Wall -Wextra -lm
 
 
 LINTFILTERS = $\
@@ -11,14 +12,14 @@ LINTFILTERS = $\
 	-readability/casting,$\
 	-runtime/references
 
-$(FILENAME):
-	$(COMPILER) ./src/$(FILENAME).c -o ./bin/$(FILENAME)
+$(FILENAME): clean
+	$(COMPILER) ./src/$(FILENAME).c $(FLAGS) -o ./bin/$(FILENAME)
 
-run:
+run: $(FILENAME)
 	mpirun -n $(PROCESSES) --oversubscribe ./bin/$(FILENAME)
 
 lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
 
 clean:
-	-rm ./bin/$(FILENAME)
+	-rm -r -f ./bin/*
