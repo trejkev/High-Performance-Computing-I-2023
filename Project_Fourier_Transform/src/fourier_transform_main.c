@@ -55,7 +55,7 @@ int main(int argc, char *argv[]) {
         }
     } else {
         if (iMyRank == 0) printf("    Missing arguments!\n");
-        return FAIL;
+        return EXIT_FAILURE;
     }
 
     // Repeat the FT code and its relevant logs iReplicas times
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
         }
         if ((fptr = fopen(sSignPath, "r")) == NULL) {
             printf("Error opening file %s\n", sSignPath);
-            return FAIL;
+            return EXIT_FAILURE;
         } else {
             size_t iInputFileLength = 3;
             lTimes[1] = timeReader();
@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
             }
         } else {
             printf("%s is not a valid ft type\n", sFourierType);
-            return FAIL;
+            return EXIT_FAILURE;
         }
 
         MPI_Barrier(MPI_COMM_WORLD);
