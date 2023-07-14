@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
     }
     for (row = 0; row < rowsOfA; row++) {
         if ( (A[row] = (size_t*)calloc(colsOfA_rowsOfB, sizeof(size_t))) == NULL) {
-            for (int rowToBeFreed = 0; rowToBeFreed <= row; rowToBeFreed++) {
+            for (size_t rowToBeFreed = 0; rowToBeFreed <= row; rowToBeFreed++) {
                 free(A[rowToBeFreed]);
             }
             free(A);
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
     }
     for (row = 0; row < colsOfA_rowsOfB; ++row) {
         if ( (B[row] = (size_t*)calloc(colsOfB, sizeof(size_t))) == NULL) {
-            for (int rowToBeFreed = 0; rowToBeFreed <= row; ++rowToBeFreed) {
+            for (size_t rowToBeFreed = 0; rowToBeFreed <= row; ++rowToBeFreed) {
                 free(B[rowToBeFreed]);
             }
             free(B);
@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
     }
     for (row = 0; row < rowsOfA; row++) {
         if ( (C[row] = (size_t*)calloc(colsOfB, sizeof(size_t))) == NULL) {
-            for (int rowToBeFreed = 0; rowToBeFreed <= row; rowToBeFreed++) {
+            for (size_t rowToBeFreed = 0; rowToBeFreed <= row; rowToBeFreed++) {
                 free(C[rowToBeFreed]);
             }
             free(C);
