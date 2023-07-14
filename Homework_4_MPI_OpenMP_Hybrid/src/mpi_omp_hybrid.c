@@ -5,6 +5,7 @@
 #include <mpi.h>
 #include <omp.h>
 #include <unistd.h>  // Enables the use of sysconf
+#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
     // General variables
