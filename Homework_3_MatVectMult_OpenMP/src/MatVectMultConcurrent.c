@@ -171,4 +171,6 @@ int main(int argc, char** argv) {
     }
     free(C);
     printf("Freed C\n");
+
+    return EXIT_SUCCESS;
 }
