@@ -1,10 +1,12 @@
 // Copyright 2023 Kevin Trejos Vargas <kevin.trejosvargas@ucr.ac.cr>
 
-#include <mpi.h>
 #include <stdio.h>
 #include <math.h>  // Use floating abs
+#include <mpi.h>
 
-int main(int argc, char** argv) {
+#define SUCCESS 0
+
+int main() {
     MPI_Init(NULL, NULL);
 
     int iRanksQty;
@@ -12,6 +14,7 @@ int main(int argc, char** argv) {
 
     int iMyRank;
     MPI_Comm_rank(MPI_COMM_WORLD, &iMyRank);
+    printf("My rank is %d\n", iMyRank);
 
     double dDeltaX = 1/((double)iRanksQty*10000);
     double dArea = 0;  // Will store the area computed by the current rank
@@ -53,4 +56,6 @@ int main(int argc, char** argv) {
     }
 
     MPI_Finalize();
+
+    return SUCCESS;
 }
