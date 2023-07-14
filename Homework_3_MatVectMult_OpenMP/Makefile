@@ -1,11 +1,12 @@
 FILENAME      = MatVectMult
-GNU_COMPILER  = gcc
+GNU_COMPILER  = clang
 SOURCES       = ./src/*.c
 THREADS       = 8
 REPEAT        = 2
 AROWS         = 1500
 BCOLS         = 1300
 ACOLS_BROWS   = 1800
+FLAGS         = -fopenmp -g -Wall -Wextra -I/usr/local/opt/llvm/include
 
 
 LINTFILTERS = $\
@@ -18,7 +19,7 @@ LINTFILTERS = $\
 $(FILENAME): clean $(FILENAME)_concurrent $(FILENAME)_sequential
 
 $(FILENAME)_concurrent: ./src/timeReader.h
-	$(GNU_COMPILER) -fopenmp ./src/$(FILENAME)Concurrent.c ./src/timeReader.c -o ./bin/$(FILENAME)_concurrent
+	$(GNU_COMPILER) ./src/$(FILENAME)Concurrent.c ./src/timeReader.c $(FLAGS)  -o ./bin/$(FILENAME)_concurrent
 
 $(FILENAME)_sequential: ./src/timeReader.h
 	$(GNU_COMPILER) ./src/$(FILENAME)Sequential.c ./src/timeReader.c -o ./bin/$(FILENAME)_sequential
@@ -33,4 +34,4 @@ lint:
 	cpplint --filter=$(LINTFILTERS) $(SOURCES)
 
 clean:
-	-rm -f ./bin/*
+	-rm -r -f ./bin/*
