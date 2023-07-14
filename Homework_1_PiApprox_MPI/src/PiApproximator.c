@@ -3,8 +3,7 @@
 #include <stdio.h>
 #include <math.h>  // Use floating abs
 #include <mpi.h>
-
-#define SUCCESS 0
+#include <stdlib.h>
 
 int main() {
     MPI_Init(NULL, NULL);
@@ -57,5 +56,5 @@ int main() {
 
     MPI_Finalize();
 
-    return SUCCESS;
+    return EXIT_SUCCESS;
 }
