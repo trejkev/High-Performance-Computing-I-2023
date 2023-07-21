@@ -134,7 +134,7 @@ The inner loop, the one that was using OpenMP, was required to be modified, sinc
 
 ### FFT Concurrency Analysis
 
-Looking at FFT code, it is already well optimized, with a computational complexity of $O(n*log(n)$, however, it was analyzed to define which concurrency strategy may fit the best. The FFT code has only one critical section that could be used for parallelization, which is a for loop embedded in it, see the figure below.
+Looking at FFT code, it is already well optimized, with a computational complexity of $O(n*log(n))$, however, it was analyzed to define which concurrency strategy may fit the best. The FFT code has only one critical section that could be used for parallelization, which is a for loop embedded in it, see the figure below.
 
 <p align="center">
   <img src="https://github.com/trejkev/High-Performance-Computing-I-2023/assets/18760154/406c7422-5cd8-4d19-8068-03ca8a2f8490" width="800"/>
